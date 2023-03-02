@@ -1,0 +1,1170 @@
+*******************************************************************************
+*                                                                             *
+*                   K1874BE96T LINKER Version 1.13.151021                     *
+*                          Copyright (C) 2012 NIIET                           *
+*                                                                             *
+*******************************************************************************
+
+                 * * *  O P T I O N S   A T   S T A R T  * * *
+
+    -O C:\Program Files\CodeMaster-96\1_32_00\CMC-96\Lib
+    -E C:\Program Files\CodeMaster-96\1_32_00\Projects\BKATR\Debug\Exe\BKATR
+    -M 10
+    -M 20
+    -M 21
+    -M 60
+    -M 80
+    -F MI
+    -m
+    -t
+    -A (code)CODE(02000H-0FFFFH)
+    -A (data)DATA(0800H-017FFH,0100H-07FFH)
+    -Z CSTACK(256)
+    -Z HEAP(0)
+
+            * * *  A D D I N G   P R O G R A M   M O D U L E S  * * *
+
+  Module:                MAIN                                    
+
+  Module:                BTA                                     
+
+  Module:                AVARIA_TA                               
+
+  Module:                TA_PROC                                 
+
+  Module:                ADC                                     
+
+  Module:                PMLC_DRV                                
+
+  Module:                ??RESERVED_FAKE_END_MODULE               
+
+  Module:                ??RESERVED_LOCATIONS_MODULE               
+
+            * * *  A D D I N G   L I B R A R Y   M O D U L E S  * * *
+
+  Module:                ??DEFAULT_CCB_MODULE     low-priority   
+
+  Module:                ??DEFAULT_INT01MODULE    low-priority   
+
+  Module:                ??DEFAULT_INT02MODULE    low-priority   
+
+  Module:                ??DEFAULT_INT03MODULE    low-priority   
+
+  Module:                ??DEFAULT_INT04MODULE    low-priority   
+
+  Module:                ??DEFAULT_INT05MODULE    low-priority   
+
+  Module:                ??DEFAULT_INT06MODULE    low-priority   
+
+  Module:                ??DEFAULT_INT07MODULE    low-priority   
+
+  Module:                ??DEFAULT_INT08MODULE    low-priority   
+
+  Module:                ??DEFAULT_INT10MODULE    low-priority   
+
+  Module:                ??DEFAULT_INT11MODULE    low-priority   
+
+  Module:                ??DEFAULT_INT12MODULE    low-priority   
+
+  Module:                ??DEFAULT_INT13MODULE    low-priority   
+
+  Module:                ??DEFAULT_INT14MODULE    low-priority   
+
+  Module:                ??DEFAULT_INT15MODULE    low-priority   
+
+  Module:                ??DEFAULT_INT16MODULE    low-priority   
+
+  Module:                ??DEFAULT_INT17MODULE    low-priority   
+
+  Module:                ??DEFAULT_INT18MODULE    low-priority   
+
+  Module:                K1874VE7T_CPU_SFR        low-priority   
+
+  Module:                K1874VE7T_GOSTR520702003_SFRlow-priority   
+
+  Module:                K1874VE7T_IOPORTS_SFR    low-priority   
+
+  Module:                ??STARTUP                low-priority   
+
+  Module:                ??SPDEF                                 
+
+  Module:                ??TMPREGS                               
+
+  Module:                ?FPADD                   low-priority   
+
+  Module:                ??FPL_ADD_MOD            low-priority   
+
+  Module:                ??FPL_PACK_MOD           low-priority   
+
+  Module:                ?FPCMP                   low-priority   
+
+  Module:                ??FPL_CMP_MOD            low-priority   
+
+  Module:                ?FPCONV16                low-priority   
+
+  Module:                ??FPL_FRM_I_MOD          low-priority   
+
+  Module:                ??FPL_FRM_UI_MOD         low-priority   
+
+  Module:                ?FPCONV16U               low-priority   
+
+  Module:                ?FPCONV32U               low-priority   
+
+  Module:                ??FPL_FRM_UL_MOD         low-priority   
+
+  Module:                ?FPDIV                   low-priority   
+
+  Module:                ??FPL_DIV_MOD            low-priority   
+
+  Module:                ?FPMUL                   low-priority   
+
+  Module:                ??FPL_MUL_MOD            low-priority   
+
+  Module:                ?FPSUB                   low-priority   
+
+  Module:                ??FPL_SUB_MOD            low-priority   
+
+  Module:                ?FPTRUNC                 low-priority   
+
+  Module:                ??FPL_TO_L_MOD           low-priority   
+
+  Module:                FABS                     low-priority   
+
+              * * *  F U L L   S E T   O F   O P T I O N S  * * *
+
+    -O C:\Program Files\CodeMaster-96\1_32_00\CMC-96\Lib
+    -E C:\Program Files\CodeMaster-96\1_32_00\Projects\BKATR\Debug\Exe\BKATR
+    -M 10
+    -M 20
+    -M 21
+    -M 60
+    -M 80
+    -F MI
+    -m
+    -t
+    -A (code)CODE(02000H-0FFFFH)
+    -A (data)DATA(0800H-017FFH,0100H-07FFH)
+    -Z CSTACK(256)
+    -Z HEAP(0)
+    -K data(2000h-2000h)
+    -K data(2032h-2032h)
+    -K data(0FE00h-0FE00h)
+    -K data(0FC80h-0FC80h)
+    -K data(0FC00h-0FC00h)
+    -K data(0FE90h-0FE90h)
+    -K data(0FEA8h-0FEA8h)
+    -K data(0FEB8h-0FEB8h)
+    -K data(0FEB0h-0FEB0h)
+    -K data(0FE88h-0FE88h)
+    -K data(0FE80h-0FE80h)
+    -K data(0FE98h-0FE98h)
+    -K data(0FEA0h-0FEA0h)
+    -K data(01F60h-01FFFh)
+    -K reg(0-019H)
+    -K code(2000H-207FH)
+    -K code(2000H-200FH)
+    -K code(2030H-203FH)
+    -K code(2060H-2061H)
+    -K code(2010H-2013H)
+    -K code(2018H-2019H)
+    -K code(2020H-202FH)
+    -K code(2080H-2082H)
+    -K reg(4-5)
+    -K reg(4-5)
+    -K reg(0004H-0005H)
+    -K reg(4-5)
+    -K reg(0004H-0005H)
+    -K reg(6-7)
+    -K reg(12-13)
+    -K reg(0004H-0007H)
+    -K reg(10-11)
+    -K reg(000CH-000DH)
+    -K reg(12-13)
+    -K reg(14-14)
+    -K reg(3-3)
+    -K reg(000AH-000EH)
+    -K reg(6-6)
+    -K reg(0003H-0003H)
+    -K reg(5-5)
+    -K reg(0006H-0006H)
+    -K reg(4-4)
+    -K reg(0005H-0005H)
+    -K reg(6-6)
+    -K reg(0004H-0004H)
+    -K reg(5-5)
+    -K reg(0006H-0006H)
+    -K reg(4-4)
+    -K reg(0005H-0005H)
+    -K reg(8-8)
+    -K reg(0004H-0004H)
+    -K reg(19-19)
+    -K reg(0008H-0008H)
+    -K reg(9-9)
+    -K reg(0013H-0013H)
+    -K reg(18-18)
+    -K reg(0009H-0009H)
+    -K reg(21-21)
+    -K reg(0012H-0012H)
+    -K reg(22-22)
+    -K reg(11-11)
+    -K reg(0015H-0016H)
+    -K reg(12-12)
+    -K reg(21-21)
+    -K reg(000BH-000CH)
+    -K reg(22-22)
+    -K reg(23-23)
+    -K reg(5-5)
+    -K reg(0015H-0017H)
+    -K reg(4-4)
+    -K reg(0005H-0005H)
+    -K reg(7-7)
+    -K reg(0004H-0004H)
+    -K reg(6-6)
+    -K reg(0007H-0007H)
+    -K reg(23-23)
+    -K reg(0006H-0006H)
+    -K reg(22-22)
+    -K reg(0017H-0017H)
+    -K reg(23-23)
+    -K reg(7-7)
+    -K reg(0016H-0017H)
+    -K reg(7-7)
+    -K reg(0007H-0007H)
+    -K reg(17-17)
+    -K reg(0007H-0007H)
+    -K reg(17-17)
+    -K reg(0011H-0011H)
+    -K reg(13-13)
+    -K reg(0011H-0011H)
+    -K reg(12-12)
+    -K reg(000DH-000DH)
+    -K reg(11-11)
+    -K reg(000CH-000CH)
+    -K reg(10-10)
+    -K reg(000BH-000BH)
+    -K reg(13-13)
+    -K reg(000AH-000AH)
+    -K reg(12-12)
+    -K reg(000DH-000DH)
+    -K reg(10-10)
+    -K reg(000CH-000CH)
+    -K reg(20-20)
+    -K reg(000AH-000AH)
+    -K reg(0014H-0014H)
+    -K data(1F30h-1F31h)
+    -K data(1F32h-1F33h)
+    -K data(1F32h-1F33h)
+    -K data(1F30H-1F33H)
+    -K data(1F32h-1F33h)
+    -K data(1F32H-1F33H)
+    -K data(1F34h-1F35h)
+    -K data(1F36h-1F37h)
+    -K data(1F38h-1F39h)
+    -K data(1F38h-1F39h)
+    -K data(1F32H-1F39H)
+    -K data(1F38h-1F39h)
+    -K data(1F38H-1F39H)
+    -K data(1F38H-1F39H)
+    -K reg(15-15)
+    -K reg(16-16)
+    -K data(1FFEh-1FFFh)
+    -K data(1FFEh-1FFEh)
+    -K data(1FFEH-1FFFH)
+    -K data(1FFFh-1FFFh)
+    -K data(1FF9h-1FF9h)
+    -K data(1FFEH-1FFFH)
+    -K reg(000EH-0010H)
+    -K data(1FF9H-1FF9H)
+    -K reg(0018H-0019H)
+    -K reg(001CH-002BH)
+
+               * * *  B U I L D I N G   S E G M E N T S  * * *
+
+  Segment: ??ABS_DATA                              data    ABS
+  ------------------------------------------------------------
+  Module                     Start         End          Size  
+  ============================================================
+  MAIN                      00000000     0000FE00     0000FE01
+  PMLC_DRV                  00000000     0000FEB8     0000FEB9
+  K1874VE7T_GOSTR520702003_SFR 00000000     00001F39     00001F3A
+  K1874VE7T_IOPORTS_SFR     00000000     00001FFF     00002000
+  ============================================================
+  Total:                min:00000000 max:0000FEB8     0000FEB9
+
+
+  Segment: ??DATA_SEGMENT_ADDRESSES                code    REL
+  ------------------------------------------------------------
+  Module                      Size        Align        Offset 
+  ============================================================
+  MAIN                      00000004        01        00000000
+  BTA                       00000004        01        00000004
+  ADC                       00000004        01        00000008
+  ??STARTUP                 00000004        01        0000000C
+  ============================================================
+  Total:                    00000010        01
+
+
+  Segment: ??INIT_DATA_SEGMENT_ADDRESSES           code    REL
+  ------------------------------------------------------------
+  Module                      Size        Align        Offset 
+  ============================================================
+  MAIN                      00000006        01        00000000
+  BTA                       00000006        01        00000006
+  ??STARTUP                 00000006        01        0000000C
+  ============================================================
+  Total:                    00000012        01
+
+
+  Segment: ??STD_LOC_SEG                           code    ABS
+  ------------------------------------------------------------
+  Module                     Start         End          Size  
+  ============================================================
+  ??RESERVED_LOCATIONS_MODULE 00000000     00002082     00002083
+  ============================================================
+  Total:                min:00000000 max:00002082     00002083
+
+
+  Segment: CDATA__MAIN                             code    REL
+  ------------------------------------------------------------
+  Module                      Size        Align        Offset 
+  ============================================================
+  MAIN                      00000332        02        00000000
+  ============================================================
+  Total:                    00000332        02
+
+
+  Segment: CODE__??CLIB                            code    REL
+  ------------------------------------------------------------
+  Module                      Size        Align        Offset 
+  ============================================================
+  ??STARTUP                 000000E4        00        00000000
+  ?FPADD                    00000010        00        000000E4
+  ??FPL_ADD_MOD             000000E4        00        000000F4
+  ??FPL_PACK_MOD            000000E5        00        000001D8
+  ?FPCMP                    00000013        00        000002BD
+  ??FPL_CMP_MOD             00000058        00        000002D0
+  ?FPCONV16                 0000000C        00        00000328
+  ??FPL_FRM_I_MOD           00000011        00        00000334
+  ??FPL_FRM_UI_MOD          00000017        00        00000345
+  ?FPCONV16U                0000000C        00        0000035C
+  ?FPCONV32U                0000000C        00        00000368
+  ??FPL_FRM_UL_MOD          00000026        00        00000374
+  ?FPDIV                    00000010        00        0000039A
+  ??FPL_DIV_MOD             00000087        00        000003AA
+  ?FPMUL                    00000010        00        00000431
+  ??FPL_MUL_MOD             00000084        00        00000441
+  ?FPSUB                    00000010        00        000004C5
+  ??FPL_SUB_MOD             00000027        00        000004D5
+  ?FPTRUNC                  0000000C        00        000004FC
+  ??FPL_TO_L_MOD            00000061        00        00000508
+  ============================================================
+  Total:                    00000569        00
+
+
+  Segment: CONST__??CLIB                           code    REL
+  ------------------------------------------------------------
+  Module                      Size        Align        Offset 
+  ============================================================
+  ??STARTUP                 00000004        01        00000000
+  ============================================================
+  Total:                    00000004        01
+
+
+  Segment: CSEG__??ISR                             code    REL
+  ------------------------------------------------------------
+  Module                      Size        Align        Offset 
+  ============================================================
+  ??DEFAULT_INT01MODULE     00000003        00        00000000
+  ??DEFAULT_INT02MODULE     00000003        00        00000003
+  ??DEFAULT_INT03MODULE     00000003        00        00000006
+  ??DEFAULT_INT04MODULE     00000003        00        00000009
+  ??DEFAULT_INT05MODULE     00000003        00        0000000C
+  ??DEFAULT_INT06MODULE     00000003        00        0000000F
+  ??DEFAULT_INT07MODULE     00000003        00        00000012
+  ??DEFAULT_INT08MODULE     00000003        00        00000015
+  ??DEFAULT_INT10MODULE     00000003        00        00000018
+  ??DEFAULT_INT11MODULE     00000003        00        0000001B
+  ??DEFAULT_INT12MODULE     00000003        00        0000001E
+  ??DEFAULT_INT13MODULE     00000003        00        00000021
+  ??DEFAULT_INT14MODULE     00000003        00        00000024
+  ??DEFAULT_INT15MODULE     00000003        00        00000027
+  ??DEFAULT_INT16MODULE     00000003        00        0000002A
+  ??DEFAULT_INT17MODULE     00000003        00        0000002D
+  ??DEFAULT_INT18MODULE     00000003        00        00000030
+  ============================================================
+  Total:                    00000033        00
+
+
+  Segment: CSTACK                                  data    REL
+  ------------------------------------------------------------
+  Module                      Size        Align        Offset 
+  ============================================================
+  ??STARTUP                 00000040        00        00000000
+  ============================================================
+  Total:        (increased) 00000100        00
+
+
+  Segment: FUN_CODE__ADC                           code    REL
+  ------------------------------------------------------------
+  Module                      Size        Align        Offset 
+  ============================================================
+  ADC                       0000016B        00        00000000
+  ============================================================
+  Total:                    0000016B        00
+
+
+  Segment: FUN_CODE__AVARIA_TA                     code    REL
+  ------------------------------------------------------------
+  Module                      Size        Align        Offset 
+  ============================================================
+  AVARIA_TA                 000006B3        00        00000000
+  ============================================================
+  Total:                    000006B3        00
+
+
+  Segment: FUN_CODE__BTA                           code    REL
+  ------------------------------------------------------------
+  Module                      Size        Align        Offset 
+  ============================================================
+  BTA                       000006EA        00        00000000
+  ============================================================
+  Total:                    000006EA        00
+
+
+  Segment: FUN_CODE__FABS                          code    REL
+  ------------------------------------------------------------
+  Module                      Size        Align        Offset 
+  ============================================================
+  FABS                      0000000F        00        00000000
+  ============================================================
+  Total:                    0000000F        00
+
+
+  Segment: FUN_CODE__MAIN                          code    REL
+  ------------------------------------------------------------
+  Module                      Size        Align        Offset 
+  ============================================================
+  MAIN                      000053C7        00        00000000
+  ============================================================
+  Total:                    000053C7        00
+
+
+  Segment: FUN_CODE__PMLC_DRV                      code    REL
+  ------------------------------------------------------------
+  Module                      Size        Align        Offset 
+  ============================================================
+  PMLC_DRV                  0000009B        00        00000000
+  ============================================================
+  Total:                    0000009B        00
+
+
+  Segment: FUN_CODE__TA_PROC                       code    REL
+  ------------------------------------------------------------
+  Module                      Size        Align        Offset 
+  ============================================================
+  TA_PROC                   00000F3B        00        00000000
+  ============================================================
+  Total:                    00000F3B        00
+
+
+  Segment: IDATA_INI__BTA                          code    REL
+  ------------------------------------------------------------
+  Module                      Size        Align        Offset 
+  ============================================================
+  BTA                       0000000A        00        00000000
+  ============================================================
+  Total:                    0000000A        00
+
+
+  Segment: IDATA_INI__MAIN                         code    REL
+  ------------------------------------------------------------
+  Module                      Size        Align        Offset 
+  ============================================================
+  MAIN                      00000016        00        00000000
+  ============================================================
+  Total:                    00000016        00
+
+
+  Segment: IDATA__BTA                              data    REL
+  ------------------------------------------------------------
+  Module                      Size        Align        Offset 
+  ============================================================
+  BTA                       0000000A        01        00000000
+  ============================================================
+  Total:                    0000000A        01
+
+
+  Segment: IDATA__MAIN                             data    REL
+  ------------------------------------------------------------
+  Module                      Size        Align        Offset 
+  ============================================================
+  MAIN                      00000016        01        00000000
+  ============================================================
+  Total:                    00000016        01
+
+
+  Segment: ISR_CODE__MAIN                          code    REL
+  ------------------------------------------------------------
+  Module                      Size        Align        Offset 
+  ============================================================
+  MAIN                      000000C1        00        00000000
+  ============================================================
+  Total:                    000000C1        00
+
+
+  Segment: TMPREG_SEG                              reg     ABS
+  ------------------------------------------------------------
+  Module                     Start         End          Size  
+  ============================================================
+  ??SPDEF                   00000000     00000019     0000001A
+  ??TMPREGS                 00000000     0000002B     0000002C
+  ============================================================
+  Total:                min:00000000 max:0000002B     0000002C
+
+
+  Segment: UDATA__ADC                              data    REL
+  ------------------------------------------------------------
+  Module                      Size        Align        Offset 
+  ============================================================
+  ADC                       0000000C        01        00000000
+  ============================================================
+  Total:                    0000000C        01
+
+
+  Segment: UDATA__BTA                              data    REL
+  ------------------------------------------------------------
+  Module                      Size        Align        Offset 
+  ============================================================
+  BTA                       00000014        01        00000000
+  ============================================================
+  Total:                    00000014        01
+
+
+  Segment: UDATA__MAIN                             data    REL
+  ------------------------------------------------------------
+  Module                      Size        Align        Offset 
+  ============================================================
+  MAIN                      0000024F        02        00000000
+  ============================================================
+  Total:                    0000024F        02
+
+         * * *  A D D R E S S   A R E A S   D E F I N I T I O N  * * *
+
+  Name:                          CODE
+  Allocation:                    code
+  Ranges:                        00002083 0000FFFF
+  Reserved for abs segments:     00002000 00002082
+
+  Name:                          DATA
+  Allocation:                    data
+  Ranges:                        00000100 000017FF
+
+  Name:                          REG
+  Allocation:                    reg
+  Ranges:                        0000001A 0000001B
+                                 0000002C 000000FF
+  Reserved for abs segments:     00000000 00000019
+                                 0000001C 0000002B
+
+     * * *  P L A C I N G   R E L O C A T A B L E   S E G M E N T S  * * *
+
+  Segment:                       CODE__??CLIB
+  Allocation:                    code
+  Size:                          00000569
+  Align:                         00
+  Address area:                  CODE
+  Border:                        >00000000
+  Placed at:                     00002083
+  Ends at:                       000025EB
+
+
+  Segment:                       CONST__??CLIB
+  Allocation:                    code
+  Size:                          00000004
+  Align:                         01
+  Address area:                  CODE
+  Border:                        >00000000
+  Placed at:                     000025EC
+  Ends at:                       000025EF
+
+
+  Segment:                       CSEG__??ISR
+  Allocation:                    code
+  Size:                          00000033
+  Align:                         00
+  Address area:                  CODE
+  Border:                        >00000000
+  Placed at:                     000025F0
+  Ends at:                       00002622
+
+
+  Segment:                       FUN_CODE__FABS
+  Allocation:                    code
+  Size:                          0000000F
+  Align:                         00
+  Address area:                  CODE
+  Border:                        >00000000
+  Placed at:                     00002623
+  Ends at:                       00002631
+
+
+  Segment:                       ??DATA_SEGMENT_ADDRESSES
+  Allocation:                    code
+  Size:                          00000010
+  Align:                         01
+  Address area:                  CODE
+  Border:                        >00000000
+  Placed at:                     00002632
+  Ends at:                       00002641
+
+
+  Segment:                       ??INIT_DATA_SEGMENT_ADDRESSES
+  Allocation:                    code
+  Size:                          00000012
+  Align:                         01
+  Address area:                  CODE
+  Border:                        >00000000
+  Placed at:                     00002642
+  Ends at:                       00002653
+
+
+  Segment:                       CDATA__MAIN
+  Allocation:                    code
+  Size:                          00000332
+  Align:                         02
+  Address area:                  CODE
+  Border:                        >00000000
+  Placed at:                     00002654
+  Ends at:                       00002985
+
+
+  Segment:                       FUN_CODE__ADC
+  Allocation:                    code
+  Size:                          0000016B
+  Align:                         00
+  Address area:                  CODE
+  Border:                        >00000000
+  Placed at:                     00002986
+  Ends at:                       00002AF0
+
+
+  Segment:                       FUN_CODE__AVARIA_TA
+  Allocation:                    code
+  Size:                          000006B3
+  Align:                         00
+  Address area:                  CODE
+  Border:                        >00000000
+  Placed at:                     00002AF1
+  Ends at:                       000031A3
+
+
+  Segment:                       FUN_CODE__BTA
+  Allocation:                    code
+  Size:                          000006EA
+  Align:                         00
+  Address area:                  CODE
+  Border:                        >00000000
+  Placed at:                     000031A4
+  Ends at:                       0000388D
+
+
+  Segment:                       FUN_CODE__MAIN
+  Allocation:                    code
+  Size:                          000053C7
+  Align:                         00
+  Address area:                  CODE
+  Border:                        >00000000
+  Placed at:                     0000388E
+  Ends at:                       00008C54
+
+
+  Segment:                       FUN_CODE__PMLC_DRV
+  Allocation:                    code
+  Size:                          0000009B
+  Align:                         00
+  Address area:                  CODE
+  Border:                        >00000000
+  Placed at:                     00008C55
+  Ends at:                       00008CEF
+
+
+  Segment:                       FUN_CODE__TA_PROC
+  Allocation:                    code
+  Size:                          00000F3B
+  Align:                         00
+  Address area:                  CODE
+  Border:                        >00000000
+  Placed at:                     00008CF0
+  Ends at:                       00009C2A
+
+
+  Segment:                       IDATA_INI__BTA
+  Allocation:                    code
+  Size:                          0000000A
+  Align:                         00
+  Address area:                  CODE
+  Border:                        >00000000
+  Placed at:                     00009C2B
+  Ends at:                       00009C34
+
+
+  Segment:                       IDATA_INI__MAIN
+  Allocation:                    code
+  Size:                          00000016
+  Align:                         00
+  Address area:                  CODE
+  Border:                        >00000000
+  Placed at:                     00009C35
+  Ends at:                       00009C4A
+
+
+  Segment:                       ISR_CODE__MAIN
+  Allocation:                    code
+  Size:                          000000C1
+  Align:                         00
+  Address area:                  CODE
+  Border:                        >00000000
+  Placed at:                     00009C4B
+  Ends at:                       00009D0B
+
+
+  Segment:                       CSTACK
+  Allocation:                    data
+  Size:                          00000100
+  Align:                         00
+  Address area:                  DATA
+  Border:                        >00000000
+  Placed at:                     00000100
+  Ends at:                       000001FF
+
+
+  Segment:                       IDATA__BTA
+  Allocation:                    data
+  Size:                          0000000A
+  Align:                         01
+  Address area:                  DATA
+  Border:                        >00000000
+  Placed at:                     00000200
+  Ends at:                       00000209
+
+
+  Segment:                       IDATA__MAIN
+  Allocation:                    data
+  Size:                          00000016
+  Align:                         01
+  Address area:                  DATA
+  Border:                        >00000000
+  Placed at:                     0000020A
+  Ends at:                       0000021F
+
+
+  Segment:                       UDATA__ADC
+  Allocation:                    data
+  Size:                          0000000C
+  Align:                         01
+  Address area:                  DATA
+  Border:                        >00000000
+  Placed at:                     00000220
+  Ends at:                       0000022B
+
+
+  Segment:                       UDATA__BTA
+  Allocation:                    data
+  Size:                          00000014
+  Align:                         01
+  Address area:                  DATA
+  Border:                        >00000000
+  Placed at:                     0000022C
+  Ends at:                       0000023F
+
+
+  Segment:                       UDATA__MAIN
+  Allocation:                    data
+  Size:                          0000024F
+  Align:                         02
+  Address area:                  DATA
+  Border:                        >00000000
+  Placed at:                     00000240
+  Ends at:                       0000048E
+
+                * * *  A D D R E S S   A R E A S   M A P  * * *
+
+  Address area: CODE
+  ----------------------------------------------------------------------------
+  Segment                       Align  Starts at   Ends at   Size(hex)   (dec)
+  ----------------------------------------------------------------------------
+  *** RESERVED ***               -     00002000    00002082  00000083    131
+  CODE__??CLIB                   0     00002083    000025EB  00000569    1385
+  CONST__??CLIB                  1     000025EC    000025EF  00000004    4
+  CSEG__??ISR                    0     000025F0    00002622  00000033    51
+  FUN_CODE__FABS                 0     00002623    00002631  0000000F    15
+  ??DATA_SEGMENT_ADDRESSES       1     00002632    00002641  00000010    16
+  ??INIT_DATA_SEGMENT_ADDRESSES  1     00002642    00002653  00000012    18
+  CDATA__MAIN                    2     00002654    00002985  00000332    818
+  FUN_CODE__ADC                  0     00002986    00002AF0  0000016B    363
+  FUN_CODE__AVARIA_TA            0     00002AF1    000031A3  000006B3    1715
+  FUN_CODE__BTA                  0     000031A4    0000388D  000006EA    1770
+  FUN_CODE__MAIN                 0     0000388E    00008C54  000053C7    21447
+  FUN_CODE__PMLC_DRV             0     00008C55    00008CEF  0000009B    155
+  FUN_CODE__TA_PROC              0     00008CF0    00009C2A  00000F3B    3899
+  IDATA_INI__BTA                 0     00009C2B    00009C34  0000000A    10
+  IDATA_INI__MAIN                0     00009C35    00009C4A  00000016    22
+  ISR_CODE__MAIN                 0     00009C4B    00009D0B  000000C1    193
+  *** GAP ***                    -     00009D0C    0000FFFF  000062F4    25332
+
+
+  Address area: DATA
+  ----------------------------------------------------------------------------
+  Segment                       Align  Starts at   Ends at   Size(hex)   (dec)
+  ----------------------------------------------------------------------------
+  CSTACK                         0     00000100    000001FF  00000100    256
+  IDATA__BTA                     1     00000200    00000209  0000000A    10
+  IDATA__MAIN                    1     0000020A    0000021F  00000016    22
+  UDATA__ADC                     1     00000220    0000022B  0000000C    12
+  UDATA__BTA                     1     0000022C    0000023F  00000014    20
+  UDATA__MAIN                    2     00000240    0000048E  0000024F    591
+  *** GAP ***                    -     0000048F    000017FF  00001371    4977
+
+
+  Address area: REG
+  ----------------------------------------------------------------------------
+  Segment                       Align  Starts at   Ends at   Size(hex)   (dec)
+  ----------------------------------------------------------------------------
+  *** RESERVED ***               -     00000000    00000019  0000001A    26
+  *** GAP ***                    -     0000001A    0000001B  00000002    2
+  *** RESERVED ***               -     0000001C    0000002B  00000010    16
+  *** GAP ***                    -     0000002C    000000FF  000000D4    212
+
+                     * * *  S Y M B O L   T A B L E  * * *
+
+  Name                           Segment          Value       Type info
+
+  ?CCB_DATA                      n/a             0000001F     n/a
+  ?INTERRUPT00                   ISR_CODE__MAIN  00009C74     n/a
+  ?INTERRUPT01                   CSEG__??ISR     000025F0     n/a
+  ?INTERRUPT02                   CSEG__??ISR     000025F3     n/a
+  ?INTERRUPT03                   CSEG__??ISR     000025F6     n/a
+  ?INTERRUPT04                   CSEG__??ISR     000025F9     n/a
+  ?INTERRUPT05                   CSEG__??ISR     000025FC     n/a
+  ?INTERRUPT06                   CSEG__??ISR     000025FF     n/a
+  ?INTERRUPT07                   CSEG__??ISR     00002602     n/a
+  ?INTERRUPT08                   CSEG__??ISR     00002605     n/a
+  ?INTERRUPT09                   ISR_CODE__MAIN  00009C4B     n/a
+  ?INTERRUPT10                   CSEG__??ISR     00002608     n/a
+  ?INTERRUPT11                   CSEG__??ISR     0000260B     n/a
+  ?INTERRUPT12                   CSEG__??ISR     0000260E     n/a
+  ?INTERRUPT13                   CSEG__??ISR     00002611     n/a
+  ?INTERRUPT14                   CSEG__??ISR     00002614     n/a
+  ?INTERRUPT15                   CSEG__??ISR     00002617     n/a
+  ?INTERRUPT16                   CSEG__??ISR     0000261A     n/a
+  ?INTERRUPT17                   CSEG__??ISR     0000261D     n/a
+  ?INTERRUPT18                   CSEG__??ISR     00002620     n/a
+  ?START                         CODE__??CLIB    00002083     <function>
+  ?TMPREGS                       TMPREG_SEG      0000001C     n/a
+  BAUD_RATE0                     ??ABS_REG       0000000E     unsigned char
+  BCV03R_N                       UDATA__MAIN     000002B8 *** <struct>
+  BCV04R_N                       UDATA__MAIN     000002C2 *** <struct>
+  BSICONFIG                      ??ABS_DATA      00001F30     unsigned int
+  BSICON_CNRTL                   ??ABS_DATA      00001F32 *** unsigned int
+  BSICON_MON                     ??ABS_DATA      00001F32 *** unsigned int
+  BSICON_TERM                    ??ABS_DATA      00001F32     unsigned int
+  BSISADDR                       ??ABS_DATA      00001F34 *** unsigned int
+  BSISPACE                       ??ABS_DATA      00001F36 *** unsigned int
+  BSISTAT_CNRTL                  ??ABS_DATA      00001F38 *** unsigned int
+  BSISTAT_MON                    ??ABS_DATA      00001F38 *** unsigned int
+  BSISTAT_TERM                   ??ABS_DATA      00001F38     unsigned int
+  BTA05R_AN                      UDATA__BTA      0000022C     <struct>
+  BTA06R_AN                      UDATA__BTA      00000236     <struct>
+  GR0_X                          UDATA__MAIN     00000320 *** unsigned char
+  GR0_Y                          UDATA__MAIN     00000321 *** unsigned char
+  GR10_X                         UDATA__MAIN     00000322 *** unsigned char
+  GR10_Y                         UDATA__MAIN     00000323 *** unsigned char
+  GR13_15                        UDATA__MAIN     00000324 *** unsigned char
+  GR14_19                        UDATA__MAIN     00000325 *** unsigned char
+  GR18_17                        UDATA__MAIN     00000326 *** unsigned char
+  GR19_18                        UDATA__MAIN     00000327 *** unsigned char
+  GR20_19                        UDATA__MAIN     00000328 *** unsigned char
+  GR22_23                        UDATA__MAIN     00000329 *** unsigned char
+  GR23                           UDATA__MAIN     0000032A *** unsigned char
+  GR24_25                        UDATA__MAIN     0000032B *** unsigned char
+  GR26_27                        UDATA__MAIN     0000032C *** unsigned char
+  GR5_X                          UDATA__MAIN     0000032D *** unsigned char
+  GR5_Y                          UDATA__MAIN     0000032E *** unsigned char
+  GR8_18                         UDATA__MAIN     0000032F *** unsigned char
+  HSI_MODE                       ??ABS_REG       00000003 *** unsigned char
+  HSI_STATUS                     ??ABS_REG       00000006 *** unsigned char
+  HSI_TIME                       ??ABS_REG       00000004 *** unsigned int
+  HSI_TIME_HI                    ??ABS_REG       00000005 *** unsigned char
+  HSI_TIME_LO                    ??ABS_REG       00000004 *** unsigned char
+  HSO_COMMAND                    ??ABS_REG       00000006 *** unsigned char
+  HSO_TIME                       ??ABS_REG       00000004 *** unsigned int
+  HSO_TIME_HI                    ??ABS_REG       00000005 *** unsigned char
+  HSO_TIME_LO                    ??ABS_REG       00000004 *** unsigned char
+  INT0_REG                       ??ABS_DATA      00002000 *** unsigned char
+  INT9_REG                       ??ABS_DATA      00002032 *** unsigned char
+  INT_MASK                       ??ABS_REG       00000008     unsigned char
+  INT_MASK1                      ??ABS_REG       00000013     unsigned char
+  INT_PEND                       ??ABS_REG       00000009 *** unsigned char
+  INT_PEND1                      ??ABS_REG       00000012 *** unsigned char
+  IOC0                           ??ABS_REG       00000015 *** unsigned char
+  IOC1                           ??ABS_REG       00000016     unsigned char
+  IOC2                           ??ABS_REG       0000000B *** unsigned char
+  IOC3                           ??ABS_REG       0000000C *** unsigned char
+  IOPORT0                        ??ABS_REG       0000000E     unsigned char
+  IOPORT1                        ??ABS_REG       0000000F     unsigned char
+  IOPORT2                        ??ABS_REG       00000010 *** unsigned char
+  IOPORT3                        ??ABS_DATA      00001FFE *** unsigned char
+  IOPORT34                       ??ABS_DATA      00001FFE *** unsigned int
+  IOPORT4                        ??ABS_DATA      00001FFF *** unsigned char
+  IOPORT5                        ??ABS_DATA      00001FF9 *** unsigned char
+  IOS0                           ??ABS_REG       00000015 *** unsigned char
+  IOS1                           ??ABS_REG       00000016 *** unsigned char
+  IOS2                           ??ABS_REG       00000017 *** unsigned char
+  IRQ_bsi                        ISR_CODE__MAIN  00009C4B *** <function>
+  PMLC_BAUD_REG                  ??ABS_DATA      0000FE90 *** unsigned char
+  PMLC_RECV_CMD_REG              ??ABS_DATA      0000FEA8 *** unsigned char
+  PMLC_RECV_CRC_REG              ??ABS_DATA      0000FEB8 *** unsigned char
+  PMLC_RECV_DATA_REG             ??ABS_DATA      0000FEB0 *** unsigned char
+  PMLC_SLAVE_REG                 ??ABS_DATA      0000FE88 *** unsigned char
+  PMLC_STATUS_REG                ??ABS_DATA      0000FE80 *** unsigned char
+  PMLC_TASK                      IDATA__BTA      00000200     <struct>
+  PMLC_TRAN_CMD_REG              ??ABS_DATA      0000FE98 *** unsigned char
+  PMLC_TRAN_DATA_REG             ??ABS_DATA      0000FEA0 *** unsigned char
+  PMLC_baud_rate                 FUN_CODE__PMLC_ 00008C6F     <function>
+  PMLC_cmd_exec                  FUN_CODE__PMLC_ 00008C86     <function>
+  PMLC_select_device             FUN_CODE__PMLC_ 00008C55     <function>
+  PTSSEL                         ??ABS_REG       00000004 *** unsigned int
+  PTSSEL_HI                      ??ABS_REG       00000005 *** unsigned char
+  PTSSEL_LO                      ??ABS_REG       00000004 *** unsigned char
+  PTSSRV                         ??ABS_REG       00000006 *** unsigned int
+  PTSSRV_HI                      ??ABS_REG       00000007 *** unsigned char
+  PTSSRV_LO                      ??ABS_REG       00000006 *** unsigned char
+  PWM0_CONTROL                   ??ABS_REG       00000017 *** unsigned char
+  PWM1_CONTROL                   ??ABS_REG       00000016 *** unsigned char
+  PWM2_CONTROL                   ??ABS_REG       00000017 *** unsigned char
+  SBUF_RX0                       ??ABS_REG       00000007     unsigned char
+  SBUF_TX0                       ??ABS_REG       00000007     unsigned char
+  SP                             TMPREG_SEG      00000018     unsigned int
+  SP_CON0                        ??ABS_REG       00000011     unsigned char
+  SP_STAT0                       ??ABS_REG       00000011     unsigned char
+  SYS_OPT_CTRL_REG               ??ABS_DATA      0000FE00 *** unsigned char
+  SYS_WDT_REPEAT                 ??ABS_DATA      0000FC80     unsigned char
+  SYS_WDT_START                  ??ABS_DATA      0000FC00     unsigned char
+  T2CAPTURE                      ??ABS_REG       0000000C *** unsigned int
+  T2CAPTURE_HI                   ??ABS_REG       0000000D *** unsigned char
+  T2CAPTURE_LO                   ??ABS_REG       0000000C *** unsigned char
+  TIMER1                         ??ABS_REG       0000000A *** unsigned int
+  TIMER1_HI                      ??ABS_REG       0000000B *** unsigned char
+  TIMER1_LO                      ??ABS_REG       0000000A *** unsigned char
+  TIMER1_irq                     ISR_CODE__MAIN  00009C74 *** <function>
+  TIMER2                         ??ABS_REG       0000000C *** unsigned int
+  TIMER2_HI                      ??ABS_REG       0000000D *** unsigned char
+  TIMER2_LO                      ??ABS_REG       0000000C *** unsigned char
+  WATCHDOG                       ??ABS_REG       0000000A *** unsigned char
+  WSR                            ??ABS_REG       00000014     unsigned char
+  adc_contr                      UDATA__MAIN     00000240 *** float
+  add_mko_buffer                 FUN_CODE__MAIN  00003922 *** <function>
+  alg                            UDATA__MAIN     00000330 *** unsigned char
+  analiz_vent_err                FUN_CODE__AVARI 000030FB     <function>
+  avt_mode1                      UDATA__MAIN     00000331 *** unsigned char
+  avt_mode2                      UDATA__MAIN     00000332 *** unsigned char
+  bav03r_N                       UDATA__ADC      00000220     <struct>
+  bl_td                          UDATA__MAIN     00000333 *** <array>
+  bshv1                          UDATA__MAIN     00000340 *** unsigned char
+  bshv1_prev                     UDATA__MAIN     00000341 *** unsigned char
+  bshv2                          UDATA__MAIN     00000342 *** unsigned char
+  bshv3                          UDATA__MAIN     00000343 *** unsigned char
+  bshv4                          UDATA__MAIN     00000344 *** unsigned char
+  bsi_int                        UDATA__MAIN     00000345 *** unsigned char
+  bsi_int_cnt                    UDATA__MAIN     00000346 *** unsigned char
+  bsi_rt_stat                    UDATA__MAIN     000002C8 *** unsigned short
+  bums_td                        UDATA__MAIN     00000347 *** <array>
+  c_msg_bshv                     UDATA__MAIN     00000354 *** unsigned char
+  c_msg_pc                       UDATA__MAIN     00000355 *** unsigned char
+  ch_mko                         UDATA__MAIN     00000356 *** unsigned char
+  change_tm                      UDATA__MAIN     00000357 *** unsigned char
+  change_tm_1                    FUN_CODE__AVARI 00002AF1     <function>
+  change_tm_2                    FUN_CODE__AVARI 00002B57     <function>
+  change_tm_3                    FUN_CODE__AVARI 00002BD9     <function>
+  change_tm_4                    FUN_CODE__AVARI 00002E8A     <function>
+  check_td_1012                  FUN_CODE__MAIN  000042F1 *** <function>
+  check_td_13                    FUN_CODE__MAIN  00003961 *** <function>
+  check_td_46                    FUN_CODE__MAIN  00003C91 *** <function>
+  check_td_79                    FUN_CODE__MAIN  00003FC1 *** <function>
+  cod_td                         UDATA__MAIN     00000358 *** <array>
+  code_av                        UDATA__MAIN     00000365     unsigned char
+  code_av_last                   UDATA__MAIN     00000366 *** unsigned char
+  command_vent                   UDATA__MAIN     00000367 *** unsigned char
+  count_mode3                    UDATA__MAIN     00000368 *** unsigned char
+  count_otk                      UDATA__MAIN     00000369 *** unsigned char
+  count_otk_g                    UDATA__MAIN     0000036A *** unsigned char
+  count_otk_h                    UDATA__MAIN     0000036B *** unsigned char
+  count_ta_vozd                  UDATA__MAIN     000002CA *** unsigned short
+  count_tim_25                   UDATA__MAIN     000002CC *** unsigned short
+  count_tim_25_otk               UDATA__MAIN     000002CE *** unsigned short
+  count_tim_25_t                 UDATA__MAIN     000002D0 *** unsigned short
+  count_timer                    UDATA__MAIN     000002D2 *** unsigned short
+  count_tr_in                    UDATA__MAIN     0000036C *** unsigned char
+  count_tr_out                   UDATA__MAIN     0000036D *** unsigned char
+  delay_7000                     FUN_CODE__MAIN  0000388E     <function>
+  delay_switch_ta                FUN_CODE__BTA   000031A4     <function>
+  delay_uart                     UDATA__MAIN     000002D4 *** unsigned short
+  dig_td                         UDATA__MAIN     0000036E *** <array>
+  exit                           CODE__??CLIB    00002165 *** <function>
+  fabs                           FUN_CODE__FABS  00002623     <function>
+  finish_25                      UDATA__MAIN     00000388 *** unsigned char
+  finish_25_otk                  UDATA__MAIN     00000389 *** unsigned char
+  finish_25_t                    UDATA__MAIN     0000038A *** unsigned char
+  first_vkl                      IDATA__MAIN     0000020E *** unsigned char
+  fl_com                         UDATA__MAIN     000002D6 *** unsigned short
+  frame_pt                       IDATA__MAIN     0000020F *** unsigned char
+  frame_tm                       IDATA__MAIN     00000210 *** unsigned char
+  g1_go                          UDATA__MAIN     0000038B     unsigned char
+  g2_go                          UDATA__MAIN     0000038C     unsigned char
+  g_com                          UDATA__MAIN     0000038D *** unsigned char
+  g_fix                          UDATA__MAIN     0000038E *** unsigned char
+  get_adc_data                   FUN_CODE__ADC   000029D8 *** <function>
+  h1_go                          UDATA__MAIN     0000038F     unsigned char
+  h2_go                          UDATA__MAIN     00000390     unsigned char
+  h_com                          UDATA__MAIN     00000391 *** unsigned char
+  h_fix                          UDATA__MAIN     00000392 *** unsigned char
+  hist_tr                        UDATA__MAIN     00000393 *** unsigned char
+  hist_tr_g                      UDATA__MAIN     00000394 *** unsigned char
+  hist_tr_h                      UDATA__MAIN     00000395 *** unsigned char
+  inf_bvm                        UDATA__MAIN     00000396 *** unsigned char
+  init_bav03r                    FUN_CODE__ADC   00002986     <function>
+  ish_g                          IDATA__MAIN     00000211 *** unsigned char
+  ish_h                          IDATA__MAIN     00000212 *** unsigned char
+  kontur_g                       FUN_CODE__TA_PR 00008CF0     <function>
+  kontur_h                       FUN_CODE__TA_PR 00008FBA     <function>
+  kpa_cm                         UDATA__MAIN     00000397 *** unsigned char
+  ks_tmi                         UDATA__MAIN     00000244 *** unsigned long
+  last_command                   UDATA__MAIN     00000398 *** unsigned char
+  last_mode_tm                   IDATA__MAIN     00000213 *** unsigned char
+  last_pc                        UDATA__MAIN     000002D8 *** unsigned short
+  last_tr_in                     UDATA__MAIN     000002DA *** unsigned short
+  last_tr_out                    UDATA__MAIN     000002DC *** unsigned short
+  main                           FUN_CODE__MAIN  00004621     <function>
+  mas_num_td                     CDATA__MAIN     00002974 *** <array>
+  mas_tm_otkaz                   CDATA__MAIN     00002981 *** <array>
+  mko_buf                        UDATA__MAIN     00000399 *** <array>
+  mko_buf_in                     UDATA__MAIN     0000044D *** unsigned char
+  mko_buf_out                    UDATA__MAIN     0000044E *** unsigned char
+  mko_in_h                       UDATA__MAIN     0000044F *** unsigned char
+  mko_in_l                       UDATA__MAIN     00000450 *** unsigned char
+  mko_out_h                      UDATA__MAIN     00000451 *** unsigned char
+  mko_out_l                      UDATA__MAIN     00000452 *** unsigned char
+  mode_td                        UDATA__MAIN     00000453 *** unsigned char
+  mode_tm                        IDATA__MAIN     00000214 *** unsigned char
+  nagr_g                         IDATA__MAIN     00000215 *** unsigned char
+  nagr_h                         IDATA__MAIN     00000216 *** unsigned char
+  nagr_off                       IDATA__MAIN     00000217 *** unsigned char
+  new_data_td                    UDATA__MAIN     00000248 *** unsigned long
+  no_off_ta                      UDATA__MAIN     00000454 *** unsigned char
+  num_AB                         UDATA__MAIN     00000455     unsigned char
+  num_com                        IDATA__MAIN     00000218 *** unsigned char
+  num_com1                       UDATA__MAIN     00000456 *** unsigned char
+  num_pm                         UDATA__MAIN     00000457 *** unsigned char
+  off_all_nag                    FUN_CODE__TA_PR 00009BAA     <function>
+  off_ta                         FUN_CODE__BTA   0000350C     <function>
+  ogk_go                         UDATA__MAIN     00000458 *** unsigned char
+  ohk_go                         UDATA__MAIN     00000459 *** unsigned char
+  on_ta                          FUN_CODE__BTA   000031B3     <function>
+  otk_g1                         UDATA__MAIN     0000045A *** unsigned char
+  otk_g2                         UDATA__MAIN     0000045B *** unsigned char
+  otk_h1                         UDATA__MAIN     0000045C *** unsigned char
+  otk_h2                         UDATA__MAIN     0000045D *** unsigned char
+  otkaz_data                     UDATA__MAIN     0000045E *** unsigned char
+  otkl_kont_g1                   FUN_CODE__TA_PR 00009372     <function>
+  otkl_kont_g2                   FUN_CODE__TA_PR 00009460     <function>
+  otkl_kont_h1                   FUN_CODE__TA_PR 000093E9     <function>
+  otkl_kont_h2                   FUN_CODE__TA_PR 000094D7     <function>
+  otkl_kontur_g                  FUN_CODE__TA_PR 00009284     <function>
+  otkl_kontur_h                  FUN_CODE__TA_PR 000092FB     <function>
+  p_mko                          UDATA__MAIN     0000045F *** unsigned char
+  privet                         UDATA__MAIN     00000460 *** unsigned char
+  prog_com                       UDATA__MAIN     00000461 *** unsigned char
+  prog_com_tm                    UDATA__MAIN     00000462 *** unsigned char
+  read_adc                       FUN_CODE__ADC   00002A77     <function>
+  read_adc_control               FUN_CODE__ADC   00002AB7     <function>
+  ruch_mode                      UDATA__MAIN     00000463 *** unsigned char
+  save_frame                     IDATA__MAIN     00000219 *** unsigned char
+  select_adc_channel             FUN_CODE__ADC   000029AE *** <function>
+  set_mode1                      FUN_CODE__MAIN  00003899 *** <function>
+  set_mode2                      FUN_CODE__MAIN  000038C5 *** <function>
+  set_mode6                      FUN_CODE__MAIN  000038F6 *** <function>
+  state_tdd1                     UDATA__MAIN     00000464 *** unsigned char
+  state_tdd2                     UDATA__MAIN     00000465 *** unsigned char
+  state_tdd3                     UDATA__MAIN     00000466 *** unsigned char
+  state_tdd4                     UDATA__MAIN     00000467 *** unsigned char
+  status_uart                    UDATA__MAIN     00000468 *** unsigned char
+  t                              UDATA__MAIN     00000469 *** unsigned char
+  t1                             UDATA__MAIN     0000024C *** float
+  t_td                           UDATA__MAIN     00000250 *** <array>
+  ta_g                           UDATA__MAIN     0000046A     unsigned char
+  ta_h                           UDATA__MAIN     0000046B     unsigned char
+  ta_tm                          UDATA__MAIN     0000046C     unsigned char
+  ta_vozd                        UDATA__MAIN     0000046D *** unsigned char
+  table_u                        CDATA__MAIN     00002654 *** <array>
+  td1                            IDATA__MAIN     0000021A *** unsigned char
+  td2                            IDATA__MAIN     0000021B *** unsigned char
+  td3                            IDATA__MAIN     0000021C *** unsigned char
+  td4                            IDATA__MAIN     0000021D *** unsigned char
+  tim_25                         UDATA__MAIN     0000046E *** unsigned char
+  tim_25_otk                     UDATA__MAIN     0000046F *** unsigned char
+  tim_25_t                       UDATA__MAIN     00000470 *** unsigned char
+  timer27                        IDATA__MAIN     0000020A *** unsigned short
+  timer5                         IDATA__MAIN     0000020C *** unsigned short
+  timer_lim                      UDATA__MAIN     000002DE *** unsigned short
+  tips_td                        UDATA__MAIN     00000471 *** unsigned char
+  tm_1                           UDATA__MAIN     00000472     unsigned char
+  tm_1_l                         UDATA__MAIN     00000473     unsigned char
+  tm_1_p                         UDATA__MAIN     00000474 *** unsigned char
+  tm_2                           UDATA__MAIN     00000475     unsigned char
+  tm_2_l                         UDATA__MAIN     00000476     unsigned char
+  tm_2_p                         UDATA__MAIN     00000477 *** unsigned char
+  tm_3                           UDATA__MAIN     00000478     unsigned char
+  tm_3_dop_g                     UDATA__MAIN     00000479 *** unsigned char
+  tm_3_dop_h                     UDATA__MAIN     0000047A *** unsigned char
+  tm_3_l                         UDATA__MAIN     0000047B     unsigned char
+  tm_3_p                         UDATA__MAIN     0000047C *** unsigned char
+  tm_4                           UDATA__MAIN     0000047D     unsigned char
+  tm_4_l                         UDATA__MAIN     0000047E     unsigned char
+  tm_4_p                         UDATA__MAIN     0000047F *** unsigned char
+  tm_data_1                      UDATA__MAIN     00000480 *** unsigned char
+  tm_data_2                      UDATA__MAIN     00000481 *** unsigned char
+  tm_data_3                      UDATA__MAIN     00000482 *** unsigned char
+  tm_data_4                      UDATA__MAIN     00000483 *** unsigned char
+  tm_data_5                      UDATA__MAIN     00000484 *** unsigned char
+  tm_data_6                      UDATA__MAIN     00000485 *** unsigned char
+  tm_data_7                      UDATA__MAIN     00000486 *** unsigned char
+  tm_data_8                      UDATA__MAIN     00000487 *** unsigned char
+  tmi                            UDATA__MAIN     000002E0 *** <array>
+  tr                             UDATA__MAIN     00000488     unsigned char
+  tsk_1                          UDATA__MAIN     00000489 *** unsigned char
+  tsk_2                          UDATA__MAIN     0000048A *** unsigned char
+  u_td                           UDATA__MAIN     00000284 *** <array>
+  vent_gh                        UDATA__MAIN     0000048B *** unsigned char
+  vent_gh_t                      UDATA__MAIN     0000048C *** unsigned char
+  vent_max                       IDATA__MAIN     0000021E *** unsigned char
+  vent_min                       IDATA__MAIN     0000021F *** unsigned char
+  vkl_kont_g1                    FUN_CODE__TA_PR 0000954E     <function>
+  vkl_kont_g2                    FUN_CODE__TA_PR 0000987C     <function>
+  vkl_kont_h1                    FUN_CODE__TA_PR 000096E5     <function>
+  vkl_kont_h2                    FUN_CODE__TA_PR 00009A13     <function>
+  zap_av149                      UDATA__MAIN     0000048D *** unsigned char
+  zap_av150                      UDATA__MAIN     0000048E *** unsigned char
+
+  ***  These symbols do not resolve any external reference
+
+
+                     * * *  O U T P U T   F I L E S  * * *
+
+  Phyton/MicroCOSM format:
+    C:\Program Files\CodeMaster-96\1_32_00\Projects\BKATR\Debug\Exe\BKATR.mce
+
+  Intel Extended HEX format:
+    C:\Program Files\CodeMaster-96\1_32_00\Projects\BKATR\Debug\Exe\BKATR.HEX  for Address Area CODE
+
+  Generated code is suitable for:  K1874BE96T
+

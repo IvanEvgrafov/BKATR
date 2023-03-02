@@ -1,0 +1,1141 @@
+*******************************************************************************
+*                                                                             *
+*              K1874BE96T C CROSS COMPILER Version 2.00.151126                *
+*                          Copyright (C) 2012 NIIET                           *
+*                                                                             *
+*******************************************************************************
+
+             delay_switch_ta:
+;FILE: .\BKATR\bta.c
+;000020    void delay_switch_ta()
+;000024        for (i = 1; i < 1000; i++)
+00000000    AD011C                         	LDBZE i?delay_switch_ta,#01h
+00000003    2003                           	SJMP  ??_1_CHECK
+                   ??_1_LOOP:
+;000025        {
+;000026            __NOP();
+00000005    FD                             	NOP   
+;000027        }
+00000006    071C                           	INC   i?delay_switch_ta
+                  ??_1_CHECK:
+00000008    89E8031C                       	CMP   i?delay_switch_ta,#03E8h
+0000000C    D3F7                           	JNC   ??_1_LOOP
+;000028    }
+0000000E    F0                             	RET   
+.ENDF
+                       on_ta:
+;000095    unsigned short on_ta(unsigned char num_ta)
+0000000F    C824                           	PUSH  _EX
+00000011    C826                           	PUSH  _FX
+00000013    B01C24                         	LDB   _EL,_AL
+;000107            if ((num_ta >= 1) && (num_ta <=16))
+00000016    980024                         	CMPB  num_ta?on_ta,0
+00000019    D702                           	JNE   ??_2_ELSE_BYPASS_19
+0000001B    21C9                           	SJMP  ??_2_ELSE
+         ??_2_ELSE_BYPASS_19:
+0000001D    991124                         	CMPB  num_ta?on_ta,#11h
+00000020    D302                           	JNC   ??_2_ELSE_BYPASS_20
+00000022    21C2                           	SJMP  ??_2_ELSE
+         ??_2_ELSE_BYPASS_20:
+;000108            {
+;000109                    if (num_ta <= 8)
+00000024    990924                         	CMPB  num_ta?on_ta,#09h
+00000027    DB2C                           	JC    ??_4_ELSE
+;000110                    {
+;000111                            if (num_AB == 0)
+00000029    B30100001D                     	LDB   _AH,num_AB
+0000002E    98001D                         	CMPB  _AH,0
+00000031    D710                           	JNE   ??_5_ELSE
+;000112                            {
+;000114                                    PMLC_select_device(NOM_PDEV, PDEV_4, &PMLC_TASK);
+00000033    111C                           	CLRB  _AL
+00000035    B1041D                         	LDB   _AH,#04h
+00000038    A100001E                       	LD    _BX,#PMLC_TASK
+0000003C    EFC1FF                         	LCALL PMLC_select_device
+;000116                                    AB = 0;
+0000003F    1125                           	CLRB  AB?on_ta
+;000117                            }
+00000041    203F                           	SJMP  ??_4_END
+                   ??_5_ELSE:
+;000119                            {
+;000121                                    PMLC_select_device(RSV_PDEV, PDEV_4, &PMLC_TASK);
+00000043    B1801C                         	LDB   _AL,#80h
+00000046    B1041D                         	LDB   _AH,#04h
+00000049    A100001E                       	LD    _BX,#PMLC_TASK
+0000004D    EFB0FF                         	LCALL PMLC_select_device
+;000123                                    AB = 1;
+00000050    B10125                         	LDB   AB?on_ta,#01h
+;000124                            }
+;000125                    }
+00000053    202D                           	SJMP  ??_4_END
+                   ??_4_ELSE:
+;000127                    {
+;000128                            if (num_AB == 0)
+00000055    B30100001D                     	LDB   _AH,num_AB
+0000005A    98001D                         	CMPB  _AH,0
+0000005D    D712                           	JNE   ??_6_ELSE
+;000129                            {
+;000131                                    PMLC_select_device(RSV_PDEV, PDEV_4, &PMLC_TASK);
+0000005F    B1801C                         	LDB   _AL,#80h
+00000062    B1041D                         	LDB   _AH,#04h
+00000065    A100001E                       	LD    _BX,#PMLC_TASK
+00000069    EF94FF                         	LCALL PMLC_select_device
+;000133                                    AB = 1;
+0000006C    B10125                         	LDB   AB?on_ta,#01h
+;000134                            }
+0000006F    200E                           	SJMP  ??_6_END
+                   ??_6_ELSE:
+;000136                            {
+;000138                                    PMLC_select_device(NOM_PDEV, PDEV_4, &PMLC_TASK);
+00000071    111C                           	CLRB  _AL
+00000073    B1041D                         	LDB   _AH,#04h
+00000076    A100001E                       	LD    _BX,#PMLC_TASK
+0000007A    EF83FF                         	LCALL PMLC_select_device
+;000140                                    AB = 0;
+0000007D    1125                           	CLRB  AB?on_ta
+;000141                            }
+                    ??_6_END:
+;000143                            num_ta = num_ta - 8;
+0000007F    75F824                         	ADDB  num_ta?on_ta,#0F8h
+;000144                    }
+                    ??_4_END:
+;000146                    PMLC_cmd_exec(&PMLC_TASK, ADDR_IO_CFG_REG, CMD_WRITE, 0x33, &(BTA06R_AN.IO_CFG_REG));
+00000082    A100001C                       	LD    _AX,#PMLC_TASK
+00000086    B1801E                         	LDB   _BL,#80h
+00000089    B1041F                         	LDB   _BH,#04h
+0000008C    B13320                         	LDB   _CL,#33h
+0000008F    A1100022                       	LD    _DX,#(BTA06R_AN+6)
+00000093    EF6AFF                         	LCALL PMLC_cmd_exec
+;000148                    if (num_ta >= 5)
+00000096    990524                         	CMPB  num_ta?on_ta,#05h
+00000099    DB02                           	JC    ??_7_ELSE_BYPASS_99
+0000009B    20A6                           	SJMP  ??_7_ELSE
+         ??_7_ELSE_BYPASS_99:
+;000149                    {
+;000151                            sdvig = num_ta - 5;
+0000009D    75FB24                         	ADDB  sdvig?on_ta,#0FBh
+;000152                            sdvig = sdvig * 2;
+000000A0    190124                         	SHLB  sdvig?on_ta,#01h
+;000154                            data_port =  1 << sdvig;
+000000A3    B10120                         	LDB   data_port?on_ta,#01h
+000000A6    192420                         	SHLB  data_port?on_ta,sdvig?on_ta
+;000155                            mask_ta_port = 3 << sdvig;
+000000A9    B10326                         	LDB   mask_ta_port?on_ta,#03h
+000000AC    192426                         	SHLB  mask_ta_port?on_ta,sdvig?on_ta
+;000158                            if (AB == 0)
+000000AF    980025                         	CMPB  AB?on_ta,0
+000000B2    D713                           	JNE   ??_8_ELSE
+;000159                            {
+;000160                                    PMLC_cmd_exec(&PMLC_TASK, ADDR_IO_PORT_1, CMD_WRITE, data_port, &(BTA06R_AN.IO_PORT_1));
+000000B4    A100001C                       	LD    _AX,#PMLC_TASK
+000000B8    B1101E                         	LDB   _BL,#10h
+000000BB    B1041F                         	LDB   _BH,#04h
+000000BE    A10B0022                       	LD    _DX,#(BTA06R_AN+1)
+000000C2    EF3BFF                         	LCALL PMLC_cmd_exec
+;000161                            }
+000000C5    2011                           	SJMP  ??_8_END
+                   ??_8_ELSE:
+;000163                            {
+;000164                                    PMLC_cmd_exec(&PMLC_TASK, ADDR_IO_PORT_5, CMD_WRITE, data_port, &(BTA06R_AN.IO_PORT_5));
+000000C7    A100001C                       	LD    _AX,#PMLC_TASK
+000000CB    B1501E                         	LDB   _BL,#50h
+000000CE    B1041F                         	LDB   _BH,#04h
+000000D1    A10F0022                       	LD    _DX,#(BTA06R_AN+5)
+000000D5    EF28FF                         	LCALL PMLC_cmd_exec
+;000165                            }
+                    ??_8_END:
+;000167                            delay_switch_ta();
+000000D8    2F26                           	SCALL delay_switch_ta
+;000170                            if (AB == 0)
+000000DA    980025                         	CMPB  AB?on_ta,0
+000000DD    D715                           	JNE   ??_9_ELSE
+;000171                            {
+;000172                                    PMLC_cmd_exec(&PMLC_TASK, ADDR_IO_PORT_1, CMD_WRITE, 0, &(BTA06R_AN.IO_PORT_1));
+000000DF    A100001C                       	LD    _AX,#PMLC_TASK
+000000E3    B1101E                         	LDB   _BL,#10h
+000000E6    B1041F                         	LDB   _BH,#04h
+000000E9    1120                           	CLRB  _CL
+000000EB    A10B0022                       	LD    _DX,#(BTA06R_AN+1)
+000000EF    EF0EFF                         	LCALL PMLC_cmd_exec
+;000173                            }
+000000F2    2013                           	SJMP  ??_9_END
+                   ??_9_ELSE:
+;000175                            {
+;000176                                    PMLC_cmd_exec(&PMLC_TASK, ADDR_IO_PORT_5, CMD_WRITE, 0, &(BTA06R_AN.IO_PORT_5));
+000000F4    A100001C                       	LD    _AX,#PMLC_TASK
+000000F8    B1501E                         	LDB   _BL,#50h
+000000FB    B1041F                         	LDB   _BH,#04h
+000000FE    1120                           	CLRB  _CL
+00000100    A10F0022                       	LD    _DX,#(BTA06R_AN+5)
+00000104    EFF9FE                         	LCALL PMLC_cmd_exec
+;000177                            }
+                    ??_9_END:
+;000180                            for (ta_t = 0; ta_t < 30000; ta_t ++)
+00000107    0124                           	CLR   ta_t?on_ta
+00000109    202D                           	SJMP  ??_10_CHECK
+                  ??_10_LOOP:
+;000181                            {
+;000185                                    PMLC_cmd_exec(&PMLC_TASK, ADDR_IO_PORT_3, CMD_READ, 0x00, &(BTA06R_AN.IO_PORT_3));
+0000010B    A100001C                       	LD    _AX,#PMLC_TASK
+0000010F    B1301E                         	LDB   _BL,#30h
+00000112    B1081F                         	LDB   _BH,#08h
+00000115    1120                           	CLRB  _CL
+00000117    A10D0022                       	LD    _DX,#(BTA06R_AN+3)
+0000011B    EFE2FE                         	LCALL PMLC_cmd_exec
+;000187                                    indata = ~BTA06R_AN.IO_PORT_3;
+0000011E    B3010D001D                     	LDB   indata?on_ta,(BTA06R_AN+3)
+00000123    121D                           	NOTB  indata?on_ta
+;000189                                    indata = (indata & mask_ta_port);
+00000125    70261D                         	ANDB  indata?on_ta,mask_ta_port?on_ta
+;000191                                    if (indata == mask_ta_port)
+00000128    98261D                         	CMPB  indata?on_ta,mask_ta_port?on_ta
+0000012B    D704                           	JNE   ??_11_ELSE
+;000192                                    {
+;000193                                            return 0;
+0000012D    011C                           	CLR   _AX
+0000012F    2232                           	SJMP  ??_EXIT?_on_ta
+;000194                                    }
+                  ??_11_ELSE:
+;000196                                    __NOP();
+00000131    FD                             	NOP   
+;000197                                    __NOP();
+00000132    FD                             	NOP   
+;000198                                    __NOP();
+00000133    FD                             	NOP   
+;000199                                    __NOP();
+00000134    FD                             	NOP   
+;000200                                    __NOP();
+00000135    FD                             	NOP   
+;000202                            }
+00000136    0724                           	INC   ta_t?on_ta
+                 ??_10_CHECK:
+00000138    89307524                       	CMP   ta_t?on_ta,#7530h
+0000013C    D3CD                           	JNC   ??_10_LOOP
+;000204                            return 1;
+0000013E    AD011C                         	LDBZE _AX,#01h
+00000141    2220                           	SJMP  ??_EXIT?_on_ta
+;000205                    }
+                   ??_7_ELSE:
+;000207                    {
+;000208                            sdvig = num_ta - 1;
+00000143    1524                           	DECB  sdvig?on_ta
+;000209                            sdvig = sdvig * 2;
+00000145    190124                         	SHLB  sdvig?on_ta,#01h
+;000211                            data_port =  1 << sdvig;
+00000148    B10120                         	LDB   data_port?on_ta,#01h
+0000014B    192420                         	SHLB  data_port?on_ta,sdvig?on_ta
+;000212                            mask_ta_port = 3 << sdvig;
+0000014E    B10326                         	LDB   mask_ta_port?on_ta,#03h
+00000151    192426                         	SHLB  mask_ta_port?on_ta,sdvig?on_ta
+;000215                            if (AB == 0)
+00000154    980025                         	CMPB  AB?on_ta,0
+00000157    D712                           	JNE   ??_12_ELSE
+;000216                            {
+;000217                                    PMLC_cmd_exec(&PMLC_TASK, ADDR_IO_PORT_0, CMD_WRITE, data_port, &(BTA06R_AN.IO_PORT_0));
+00000159    A100001C                       	LD    _AX,#PMLC_TASK
+0000015D    111E                           	CLRB  _BL
+0000015F    B1041F                         	LDB   _BH,#04h
+00000162    A10A0022                       	LD    _DX,#BTA06R_AN
+00000166    EF97FE                         	LCALL PMLC_cmd_exec
+;000218                            }
+00000169    2011                           	SJMP  ??_12_END
+                  ??_12_ELSE:
+;000220                            {
+;000221                                    PMLC_cmd_exec(&PMLC_TASK, ADDR_IO_PORT_4, CMD_WRITE, data_port, &(BTA06R_AN.IO_PORT_4));
+0000016B    A100001C                       	LD    _AX,#PMLC_TASK
+0000016F    B1401E                         	LDB   _BL,#40h
+00000172    B1041F                         	LDB   _BH,#04h
+00000175    A10E0022                       	LD    _DX,#(BTA06R_AN+4)
+00000179    EF84FE                         	LCALL PMLC_cmd_exec
+;000222                            }
+                   ??_12_END:
+;000224                            delay_switch_ta();
+0000017C    2E82                           	SCALL delay_switch_ta
+;000226                            if (AB == 0)
+0000017E    980025                         	CMPB  AB?on_ta,0
+00000181    D714                           	JNE   ??_13_ELSE
+;000227                            {
+;000228                                    PMLC_cmd_exec(&PMLC_TASK, ADDR_IO_PORT_0, CMD_WRITE, 0, &(BTA06R_AN.IO_PORT_0));
+00000183    A100001C                       	LD    _AX,#PMLC_TASK
+00000187    111E                           	CLRB  _BL
+00000189    B1041F                         	LDB   _BH,#04h
+0000018C    1120                           	CLRB  _CL
+0000018E    A10A0022                       	LD    _DX,#BTA06R_AN
+00000192    EF6BFE                         	LCALL PMLC_cmd_exec
+;000229                            }
+00000195    2013                           	SJMP  ??_13_END
+                  ??_13_ELSE:
+;000231                            {
+;000232                                    PMLC_cmd_exec(&PMLC_TASK, ADDR_IO_PORT_4, CMD_WRITE, 0, &(BTA06R_AN.IO_PORT_4));
+00000197    A100001C                       	LD    _AX,#PMLC_TASK
+0000019B    B1401E                         	LDB   _BL,#40h
+0000019E    B1041F                         	LDB   _BH,#04h
+000001A1    1120                           	CLRB  _CL
+000001A3    A10E0022                       	LD    _DX,#(BTA06R_AN+4)
+000001A7    EF56FE                         	LCALL PMLC_cmd_exec
+;000233                            }
+                   ??_13_END:
+;000236                            for (ta_t = 0; ta_t < 30000; ta_t ++)
+000001AA    0124                           	CLR   ta_t?on_ta
+000001AC    202D                           	SJMP  ??_14_CHECK
+                  ??_14_LOOP:
+;000237                            {
+;000241                                    PMLC_cmd_exec(&PMLC_TASK, ADDR_IO_PORT_2, CMD_READ, 0x00, &(BTA06R_AN.IO_PORT_2));
+000001AE    A100001C                       	LD    _AX,#PMLC_TASK
+000001B2    B1201E                         	LDB   _BL,#20h
+000001B5    B1081F                         	LDB   _BH,#08h
+000001B8    1120                           	CLRB  _CL
+000001BA    A10C0022                       	LD    _DX,#(BTA06R_AN+2)
+000001BE    EF3FFE                         	LCALL PMLC_cmd_exec
+;000243                                    indata = ~BTA06R_AN.IO_PORT_2;
+000001C1    B3010C001D                     	LDB   indata?on_ta,(BTA06R_AN+2)
+000001C6    121D                           	NOTB  indata?on_ta
+;000245                                    indata = (indata & mask_ta_port);
+000001C8    70261D                         	ANDB  indata?on_ta,mask_ta_port?on_ta
+;000247                                    if (indata == mask_ta_port)
+000001CB    98261D                         	CMPB  indata?on_ta,mask_ta_port?on_ta
+000001CE    D704                           	JNE   ??_15_ELSE
+;000248                                    {
+;000249                                            return 0;
+000001D0    011C                           	CLR   _AX
+000001D2    218F                           	SJMP  ??_EXIT?_on_ta
+;000250                                    }
+                  ??_15_ELSE:
+;000252                                    __NOP();
+000001D4    FD                             	NOP   
+;000253                                    __NOP();
+000001D5    FD                             	NOP   
+;000254                                    __NOP();
+000001D6    FD                             	NOP   
+;000255                                    __NOP();
+000001D7    FD                             	NOP   
+;000256                                    __NOP();
+000001D8    FD                             	NOP   
+;000257                            }
+000001D9    0724                           	INC   ta_t?on_ta
+                 ??_14_CHECK:
+000001DB    89307524                       	CMP   ta_t?on_ta,#7530h
+000001DF    D3CD                           	JNC   ??_14_LOOP
+;000259                            return 1;
+000001E1    AD011C                         	LDBZE _AX,#01h
+000001E4    217D                           	SJMP  ??_EXIT?_on_ta
+;000260                    }
+;000261            }
+                   ??_2_ELSE:
+;000267            if ((num_ta > 16) &&  (num_ta <=20))
+000001E6    991124                         	CMPB  num_ta?on_ta,#11h
+000001E9    D332                           	JNC   ??_16_ELSE
+000001EB    991524                         	CMPB  num_ta?on_ta,#15h
+000001EE    DB2D                           	JC    ??_16_ELSE
+;000268            {
+;000271                    if (num_AB == 0)
+000001F0    B30100001D                     	LDB   _AH,num_AB
+000001F5    98001D                         	CMPB  _AH,0
+000001F8    D710                           	JNE   ??_18_ELSE
+;000272                    {
+;000273                            PMLC_select_device(NOM_PDEV, PDEV_3, &PMLC_TASK);
+000001FA    111C                           	CLRB  _AL
+000001FC    B1031D                         	LDB   _AH,#03h
+000001FF    A100001E                       	LD    _BX,#PMLC_TASK
+00000203    EFFAFD                         	LCALL PMLC_select_device
+;000274                            AB = 0;
+00000206    1125                           	CLRB  AB?on_ta
+;000275                    }
+00000208    2010                           	SJMP  ??_18_END
+                  ??_18_ELSE:
+;000277                    {
+;000278                             PMLC_select_device(RSV_PDEV, PDEV_3, &PMLC_TASK);
+0000020A    B1801C                         	LDB   _AL,#80h
+0000020D    B1031D                         	LDB   _AH,#03h
+00000210    A100001E                       	LD    _BX,#PMLC_TASK
+00000214    EFE9FD                         	LCALL PMLC_select_device
+;000279                             AB = 1;
+00000217    B10125                         	LDB   AB?on_ta,#01h
+;000280                    }
+                   ??_18_END:
+;000282                    num_ta = num_ta - 16;
+0000021A    75F024                         	ADDB  num_ta?on_ta,#0F0h
+;000283            }
+                  ??_16_ELSE:
+;000285            if ((num_ta > 20) &&  (num_ta <=24))
+0000021D    991524                         	CMPB  num_ta?on_ta,#15h
+00000220    D332                           	JNC   ??_19_ELSE
+00000222    991924                         	CMPB  num_ta?on_ta,#19h
+00000225    DB2D                           	JC    ??_19_ELSE
+;000286            {
+;000289                    if (num_AB == 0)
+00000227    B30100001D                     	LDB   _AH,num_AB
+0000022C    98001D                         	CMPB  _AH,0
+0000022F    D710                           	JNE   ??_21_ELSE
+;000290                    {
+;000291                            PMLC_select_device(NOM_PDEV, PDEV_2, &PMLC_TASK);
+00000231    111C                           	CLRB  _AL
+00000233    B1021D                         	LDB   _AH,#02h
+00000236    A100001E                       	LD    _BX,#PMLC_TASK
+0000023A    EFC3FD                         	LCALL PMLC_select_device
+;000292                            AB = 0;
+0000023D    1125                           	CLRB  AB?on_ta
+;000293                    }
+0000023F    2010                           	SJMP  ??_21_END
+                  ??_21_ELSE:
+;000295                    {
+;000296                            PMLC_select_device(RSV_PDEV, PDEV_2, &PMLC_TASK);
+00000241    B1801C                         	LDB   _AL,#80h
+00000244    B1021D                         	LDB   _AH,#02h
+00000247    A100001E                       	LD    _BX,#PMLC_TASK
+0000024B    EFB2FD                         	LCALL PMLC_select_device
+;000297                            AB = 1;
+0000024E    B10125                         	LDB   AB?on_ta,#01h
+;000298                    }
+                   ??_21_END:
+;000300                    num_ta = num_ta - 20;
+00000251    75EC24                         	ADDB  num_ta?on_ta,#0ECh
+;000301            }
+                  ??_19_ELSE:
+;000304            if ((num_ta > 24) && (num_ta <=28))
+00000254    991924                         	CMPB  num_ta?on_ta,#19h
+00000257    D332                           	JNC   ??_22_ELSE
+00000259    991D24                         	CMPB  num_ta?on_ta,#1Dh
+0000025C    DB2D                           	JC    ??_22_ELSE
+;000305            {
+;000309                    if (num_AB == 0)
+0000025E    B30100001D                     	LDB   _AH,num_AB
+00000263    98001D                         	CMPB  _AH,0
+00000266    D712                           	JNE   ??_24_ELSE
+;000310                    {
+;000311                            PMLC_select_device(RSV_PDEV, PDEV_2, &PMLC_TASK);
+00000268    B1801C                         	LDB   _AL,#80h
+0000026B    B1021D                         	LDB   _AH,#02h
+0000026E    A100001E                       	LD    _BX,#PMLC_TASK
+00000272    EF8BFD                         	LCALL PMLC_select_device
+;000312                            AB = 1;
+00000275    B10125                         	LDB   AB?on_ta,#01h
+;000313                    }
+00000278    200E                           	SJMP  ??_24_END
+                  ??_24_ELSE:
+;000315                    {
+;000316                             PMLC_select_device(NOM_PDEV, PDEV_2, &PMLC_TASK);
+0000027A    111C                           	CLRB  _AL
+0000027C    B1021D                         	LDB   _AH,#02h
+0000027F    A100001E                       	LD    _BX,#PMLC_TASK
+00000283    EF7AFD                         	LCALL PMLC_select_device
+;000317                             AB = 0;
+00000286    1125                           	CLRB  AB?on_ta
+;000318                    }
+                   ??_24_END:
+;000320                    num_ta = num_ta - 24;
+00000288    75E824                         	ADDB  num_ta?on_ta,#0E8h
+;000321            }
+                  ??_22_ELSE:
+;000324            if ((num_ta > 28) &&  (num_ta <=32))
+0000028B    991D24                         	CMPB  num_ta?on_ta,#1Dh
+0000028E    D332                           	JNC   ??_25_ELSE
+00000290    992124                         	CMPB  num_ta?on_ta,#21h
+00000293    DB2D                           	JC    ??_25_ELSE
+;000325            {
+;000328                    if (num_AB == 0)
+00000295    B30100001D                     	LDB   _AH,num_AB
+0000029A    98001D                         	CMPB  _AH,0
+0000029D    D712                           	JNE   ??_27_ELSE
+;000329                    {
+;000330                            PMLC_select_device(RSV_PDEV, PDEV_3, &PMLC_TASK);
+0000029F    B1801C                         	LDB   _AL,#80h
+000002A2    B1031D                         	LDB   _AH,#03h
+000002A5    A100001E                       	LD    _BX,#PMLC_TASK
+000002A9    EF54FD                         	LCALL PMLC_select_device
+;000331                            AB = 1;
+000002AC    B10125                         	LDB   AB?on_ta,#01h
+;000332                    }
+000002AF    200E                           	SJMP  ??_27_END
+                  ??_27_ELSE:
+;000334                    {
+;000335                            PMLC_select_device(NOM_PDEV, PDEV_3, &PMLC_TASK);
+000002B1    111C                           	CLRB  _AL
+000002B3    B1031D                         	LDB   _AH,#03h
+000002B6    A100001E                       	LD    _BX,#PMLC_TASK
+000002BA    EF43FD                         	LCALL PMLC_select_device
+;000336                            AB = 0;
+000002BD    1125                           	CLRB  AB?on_ta
+;000337                    }
+                   ??_27_END:
+;000339                    num_ta = num_ta - 28;
+000002BF    75E424                         	ADDB  num_ta?on_ta,#0E4h
+;000340            }
+                  ??_25_ELSE:
+;000343            sdvig = num_ta - 1;
+000002C2    1524                           	DECB  sdvig?on_ta
+;000344            sdvig = sdvig * 2;
+000002C4    190124                         	SHLB  sdvig?on_ta,#01h
+;000346            data_port =  1 << sdvig;
+000002C7    B10120                         	LDB   data_port?on_ta,#01h
+000002CA    192420                         	SHLB  data_port?on_ta,sdvig?on_ta
+;000347            mask_ta_port = 3 << sdvig;
+000002CD    B10326                         	LDB   mask_ta_port?on_ta,#03h
+000002D0    192426                         	SHLB  mask_ta_port?on_ta,sdvig?on_ta
+;000350            if (AB == 0)
+000002D3    980025                         	CMPB  AB?on_ta,0
+000002D6    D712                           	JNE   ??_28_ELSE
+;000351            {
+;000352                    PMLC_cmd_exec(&PMLC_TASK, ADDR_IO_PORT_0, CMD_WRITE, data_port, &(BTA05R_AN.IO_PORT_0));
+000002D8    A100001C                       	LD    _AX,#PMLC_TASK
+000002DC    111E                           	CLRB  _BL
+000002DE    B1041F                         	LDB   _BH,#04h
+000002E1    A1000022                       	LD    _DX,#BTA05R_AN
+000002E5    EF18FD                         	LCALL PMLC_cmd_exec
+;000353            }
+000002E8    2011                           	SJMP  ??_28_END
+                  ??_28_ELSE:
+;000355            {
+;000356                    PMLC_cmd_exec(&PMLC_TASK, ADDR_IO_PORT_4, CMD_WRITE, data_port, &(BTA05R_AN.IO_PORT_4));
+000002EA    A100001C                       	LD    _AX,#PMLC_TASK
+000002EE    B1401E                         	LDB   _BL,#40h
+000002F1    B1041F                         	LDB   _BH,#04h
+000002F4    A1040022                       	LD    _DX,#(BTA05R_AN+4)
+000002F8    EF05FD                         	LCALL PMLC_cmd_exec
+;000357            }
+                   ??_28_END:
+;000359            delay_switch_ta();
+000002FB    2D03                           	SCALL delay_switch_ta
+;000361            if (AB == 0)
+000002FD    980025                         	CMPB  AB?on_ta,0
+00000300    D714                           	JNE   ??_29_ELSE
+;000362            {
+;000363                    PMLC_cmd_exec(&PMLC_TASK, ADDR_IO_PORT_0, CMD_WRITE, 0, &(BTA05R_AN.IO_PORT_0));
+00000302    A100001C                       	LD    _AX,#PMLC_TASK
+00000306    111E                           	CLRB  _BL
+00000308    B1041F                         	LDB   _BH,#04h
+0000030B    1120                           	CLRB  _CL
+0000030D    A1000022                       	LD    _DX,#BTA05R_AN
+00000311    EFECFC                         	LCALL PMLC_cmd_exec
+;000364            }
+00000314    2013                           	SJMP  ??_29_END
+                  ??_29_ELSE:
+;000366            {
+;000367                    PMLC_cmd_exec(&PMLC_TASK, ADDR_IO_PORT_4, CMD_WRITE, 0, &(BTA05R_AN.IO_PORT_4));
+00000316    A100001C                       	LD    _AX,#PMLC_TASK
+0000031A    B1401E                         	LDB   _BL,#40h
+0000031D    B1041F                         	LDB   _BH,#04h
+00000320    1120                           	CLRB  _CL
+00000322    A1040022                       	LD    _DX,#(BTA05R_AN+4)
+00000326    EFD7FC                         	LCALL PMLC_cmd_exec
+;000368            }
+                   ??_29_END:
+;000371            for (ta_t = 0; ta_t < 30000; ta_t ++)
+00000329    0124                           	CLR   ta_t?on_ta
+0000032B    202D                           	SJMP  ??_30_CHECK
+                  ??_30_LOOP:
+;000372            {
+;000375                    PMLC_cmd_exec(&PMLC_TASK, ADDR_IO_PORT_2, CMD_READ, 0x00, &(BTA05R_AN.IO_PORT_2));
+0000032D    A100001C                       	LD    _AX,#PMLC_TASK
+00000331    B1201E                         	LDB   _BL,#20h
+00000334    B1081F                         	LDB   _BH,#08h
+00000337    1120                           	CLRB  _CL
+00000339    A1020022                       	LD    _DX,#(BTA05R_AN+2)
+0000033D    EFC0FC                         	LCALL PMLC_cmd_exec
+;000377                    indata = ~BTA05R_AN.IO_PORT_2;
+00000340    B30102001D                     	LDB   indata?on_ta,(BTA05R_AN+2)
+00000345    121D                           	NOTB  indata?on_ta
+;000379                    indata = (indata & mask_ta_port);
+00000347    70261D                         	ANDB  indata?on_ta,mask_ta_port?on_ta
+;000381                    if (indata == mask_ta_port)
+0000034A    98261D                         	CMPB  indata?on_ta,mask_ta_port?on_ta
+0000034D    D704                           	JNE   ??_31_ELSE
+;000382                    {
+;000383                            return 0;
+0000034F    011C                           	CLR   _AX
+00000351    2010                           	SJMP  ??_EXIT?_on_ta
+;000384                    }
+                  ??_31_ELSE:
+;000386                    __NOP();
+00000353    FD                             	NOP   
+;000387                    __NOP();
+00000354    FD                             	NOP   
+;000388                    __NOP();
+00000355    FD                             	NOP   
+;000389                    __NOP();
+00000356    FD                             	NOP   
+;000390                    __NOP();
+00000357    FD                             	NOP   
+;000391            }
+00000358    0724                           	INC   ta_t?on_ta
+                 ??_30_CHECK:
+0000035A    89307524                       	CMP   ta_t?on_ta,#7530h
+0000035E    D3CD                           	JNC   ??_30_LOOP
+;000393            return 1;
+00000360    AD011C                         	LDBZE _AX,#01h
+;000394    }
+              ??_EXIT?_on_ta:
+00000363    CC26                           	POP   _FX
+00000365    CC24                           	POP   _EX
+00000367    F0                             	RET   
+.ENDF
+                      off_ta:
+;000399    unsigned short off_ta(unsigned char num_ta)
+00000368    C824                           	PUSH  _EX
+0000036A    C826                           	PUSH  _FX
+0000036C    B01C24                         	LDB   _EL,_AL
+;000411            if ((num_ta >= 1) && (num_ta <=16))
+0000036F    980024                         	CMPB  num_ta?off_ta,0
+00000372    D702                           	JNE   ??_32_ELSE_BYPASS_372
+00000374    21D7                           	SJMP  ??_32_ELSE
+       ??_32_ELSE_BYPASS_372:
+00000376    991124                         	CMPB  num_ta?off_ta,#11h
+00000379    D302                           	JNC   ??_32_ELSE_BYPASS_379
+0000037B    21D0                           	SJMP  ??_32_ELSE
+       ??_32_ELSE_BYPASS_379:
+;000412            {
+;000413                    if (num_ta <= 8)
+0000037D    990924                         	CMPB  num_ta?off_ta,#09h
+00000380    DB2C                           	JC    ??_34_ELSE
+;000414                    {
+;000415                            if (num_AB == 0)
+00000382    B30100001D                     	LDB   _AH,num_AB
+00000387    98001D                         	CMPB  _AH,0
+0000038A    D710                           	JNE   ??_35_ELSE
+;000416                            {
+;000418                                    PMLC_select_device(NOM_PDEV, PDEV_4, &PMLC_TASK);
+0000038C    111C                           	CLRB  _AL
+0000038E    B1041D                         	LDB   _AH,#04h
+00000391    A100001E                       	LD    _BX,#PMLC_TASK
+00000395    EF68FC                         	LCALL PMLC_select_device
+;000420                                    AB = 0;
+00000398    1125                           	CLRB  AB?off_ta
+;000421                            }
+0000039A    203F                           	SJMP  ??_34_END
+                  ??_35_ELSE:
+;000423                            {
+;000425                                    PMLC_select_device(RSV_PDEV, PDEV_4, &PMLC_TASK);
+0000039C    B1801C                         	LDB   _AL,#80h
+0000039F    B1041D                         	LDB   _AH,#04h
+000003A2    A100001E                       	LD    _BX,#PMLC_TASK
+000003A6    EF57FC                         	LCALL PMLC_select_device
+;000427                                    AB = 1;
+000003A9    B10125                         	LDB   AB?off_ta,#01h
+;000428                            }
+;000429                    }
+000003AC    202D                           	SJMP  ??_34_END
+                  ??_34_ELSE:
+;000431                    {
+;000432                            if (num_AB == 0)
+000003AE    B30100001D                     	LDB   _AH,num_AB
+000003B3    98001D                         	CMPB  _AH,0
+000003B6    D712                           	JNE   ??_36_ELSE
+;000433                            {
+;000435                                    PMLC_select_device(RSV_PDEV, PDEV_4, &PMLC_TASK);
+000003B8    B1801C                         	LDB   _AL,#80h
+000003BB    B1041D                         	LDB   _AH,#04h
+000003BE    A100001E                       	LD    _BX,#PMLC_TASK
+000003C2    EF3BFC                         	LCALL PMLC_select_device
+;000437                                    AB = 1;
+000003C5    B10125                         	LDB   AB?off_ta,#01h
+;000438                            }
+000003C8    200E                           	SJMP  ??_36_END
+                  ??_36_ELSE:
+;000440                            {
+;000442                                    PMLC_select_device(NOM_PDEV, PDEV_4, &PMLC_TASK);
+000003CA    111C                           	CLRB  _AL
+000003CC    B1041D                         	LDB   _AH,#04h
+000003CF    A100001E                       	LD    _BX,#PMLC_TASK
+000003D3    EF2AFC                         	LCALL PMLC_select_device
+;000444                                    AB = 0;
+000003D6    1125                           	CLRB  AB?off_ta
+;000445                            }
+                   ??_36_END:
+;000447                            num_ta = num_ta - 8;
+000003D8    75F824                         	ADDB  num_ta?off_ta,#0F8h
+;000448                    }
+                   ??_34_END:
+;000450                    if (num_ta >= 5)
+000003DB    990524                         	CMPB  num_ta?off_ta,#05h
+000003DE    DB02                           	JC    ??_37_ELSE_BYPASS_3DE
+000003E0    20B7                           	SJMP  ??_37_ELSE
+       ??_37_ELSE_BYPASS_3DE:
+;000451                    {
+;000452                            sdvig = num_ta - 5;
+000003E2    75FB24                         	ADDB  sdvig?off_ta,#0FBh
+;000453                            sdvig = sdvig * 2;
+000003E5    190124                         	SHLB  sdvig?off_ta,#01h
+;000455                            data_port =  2 << sdvig;
+000003E8    B10220                         	LDB   data_port?off_ta,#02h
+000003EB    192420                         	SHLB  data_port?off_ta,sdvig?off_ta
+;000456                            mask_ta_port = 3 << sdvig;
+000003EE    B10326                         	LDB   mask_ta_port?off_ta,#03h
+000003F1    192426                         	SHLB  mask_ta_port?off_ta,sdvig?off_ta
+;000458                            if (AB == 0)
+000003F4    980025                         	CMPB  AB?off_ta,0
+000003F7    D713                           	JNE   ??_38_ELSE
+;000459                            {
+;000460                                    PMLC_cmd_exec(&PMLC_TASK, ADDR_IO_PORT_1, CMD_WRITE, data_port, &(BTA06R_AN.IO_PORT_1));
+000003F9    A100001C                       	LD    _AX,#PMLC_TASK
+000003FD    B1101E                         	LDB   _BL,#10h
+00000400    B1041F                         	LDB   _BH,#04h
+00000403    A10B0022                       	LD    _DX,#(BTA06R_AN+1)
+00000407    EFF6FB                         	LCALL PMLC_cmd_exec
+;000461                            }
+0000040A    2011                           	SJMP  ??_38_END
+                  ??_38_ELSE:
+;000463                            {
+;000464                                    PMLC_cmd_exec(&PMLC_TASK, ADDR_IO_PORT_5, CMD_WRITE, data_port, &(BTA06R_AN.IO_PORT_5));
+0000040C    A100001C                       	LD    _AX,#PMLC_TASK
+00000410    B1501E                         	LDB   _BL,#50h
+00000413    B1041F                         	LDB   _BH,#04h
+00000416    A10F0022                       	LD    _DX,#(BTA06R_AN+5)
+0000041A    EFE3FB                         	LCALL PMLC_cmd_exec
+;000465                            }
+                   ??_38_END:
+;000467                            delay_switch_ta();
+0000041D    EFE0FB                         	LCALL delay_switch_ta
+;000469                            if (AB == 0)
+00000420    980025                         	CMPB  AB?off_ta,0
+00000423    D715                           	JNE   ??_39_ELSE
+;000470                            {
+;000471                                    PMLC_cmd_exec(&PMLC_TASK, ADDR_IO_PORT_1, CMD_WRITE, 0, &(BTA06R_AN.IO_PORT_1));
+00000425    A100001C                       	LD    _AX,#PMLC_TASK
+00000429    B1101E                         	LDB   _BL,#10h
+0000042C    B1041F                         	LDB   _BH,#04h
+0000042F    1120                           	CLRB  _CL
+00000431    A10B0022                       	LD    _DX,#(BTA06R_AN+1)
+00000435    EFC8FB                         	LCALL PMLC_cmd_exec
+;000472                            }
+00000438    2013                           	SJMP  ??_39_END
+                  ??_39_ELSE:
+;000474                            {
+;000475                                    PMLC_cmd_exec(&PMLC_TASK, ADDR_IO_PORT_5, CMD_WRITE, 0, &(BTA06R_AN.IO_PORT_5));
+0000043A    A100001C                       	LD    _AX,#PMLC_TASK
+0000043E    B1501E                         	LDB   _BL,#50h
+00000441    B1041F                         	LDB   _BH,#04h
+00000444    1120                           	CLRB  _CL
+00000446    A10F0022                       	LD    _DX,#(BTA06R_AN+5)
+0000044A    EFB3FB                         	LCALL PMLC_cmd_exec
+;000476                            }
+                   ??_39_END:
+;000479                            for (ta_t = 0; ta_t < 32000; ta_t ++)
+0000044D    0124                           	CLR   ta_t?off_ta
+0000044F    203D                           	SJMP  ??_40_CHECK
+                  ??_40_LOOP:
+;000480                            {
+;000483                                    PMLC_cmd_exec(&PMLC_TASK, ADDR_IO_PORT_3, CMD_READ, 0x00, &(BTA06R_AN.IO_PORT_3));
+00000451    A100001C                       	LD    _AX,#PMLC_TASK
+00000455    B1301E                         	LDB   _BL,#30h
+00000458    B1081F                         	LDB   _BH,#08h
+0000045B    1120                           	CLRB  _CL
+0000045D    A10D0022                       	LD    _DX,#(BTA06R_AN+3)
+00000461    EF9CFB                         	LCALL PMLC_cmd_exec
+;000485                                    indata = BTA06R_AN.IO_PORT_3;
+00000464    B3010D001D                     	LDB   indata?off_ta,(BTA06R_AN+3)
+;000487                                    indata = indata & mask_ta_port;
+00000469    70261D                         	ANDB  indata?off_ta,mask_ta_port?off_ta
+;000489                                    if (indata == mask_ta_port)
+0000046C    98261D                         	CMPB  indata?off_ta,mask_ta_port?off_ta
+0000046F    D704                           	JNE   ??_41_ELSE
+;000490                                    {
+;000491                                            return 0;
+00000471    011C                           	CLR   _AX
+00000473    2270                           	SJMP  ??_EXIT?_off_ta
+;000492                                    }
+                  ??_41_ELSE:
+;000494                                    __NOP();
+00000475    FD                             	NOP   
+;000495                                    __NOP();
+00000476    FD                             	NOP   
+;000496                                    __NOP();
+00000477    FD                             	NOP   
+;000497                                    __NOP();
+00000478    FD                             	NOP   
+;000498                                    __NOP();
+00000479    FD                             	NOP   
+;000502                                    __DI();
+0000047A    FA                             	DI    
+;000504                                    SYS_WDT_START = 0x3C;
+0000047B    B13C1D                         	LDB   _AH,#3Ch
+0000047E    C70100001D                     	STB   _AH,SYS_WDT_START
+;000505                                    SYS_WDT_REPEAT = 0xA5;
+00000483    B1A51D                         	LDB   _AH,#0A5h
+00000486    C70100001D                     	STB   _AH,SYS_WDT_REPEAT
+;000507                                    __EI();
+0000048B    FB                             	EI    
+;000508                             }
+0000048C    0724                           	INC   ta_t?off_ta
+                 ??_40_CHECK:
+0000048E    89007D24                       	CMP   ta_t?off_ta,#7D00h
+00000492    D3BD                           	JNC   ??_40_LOOP
+;000510                            return 1;
+00000494    AD011C                         	LDBZE _AX,#01h
+00000497    224C                           	SJMP  ??_EXIT?_off_ta
+;000511                    }
+                  ??_37_ELSE:
+;000513                    {
+;000514                            sdvig = num_ta - 1;
+00000499    1524                           	DECB  sdvig?off_ta
+;000515                            sdvig = sdvig * 2;
+0000049B    190124                         	SHLB  sdvig?off_ta,#01h
+;000517                            data_port =  2 << sdvig;
+0000049E    B10220                         	LDB   data_port?off_ta,#02h
+000004A1    192420                         	SHLB  data_port?off_ta,sdvig?off_ta
+;000518                            mask_ta_port = 3 << sdvig;
+000004A4    B10326                         	LDB   mask_ta_port?off_ta,#03h
+000004A7    192426                         	SHLB  mask_ta_port?off_ta,sdvig?off_ta
+;000521                            if (AB == 0)
+000004AA    980025                         	CMPB  AB?off_ta,0
+000004AD    D712                           	JNE   ??_42_ELSE
+;000522                            {
+;000523                                    PMLC_cmd_exec(&PMLC_TASK, ADDR_IO_PORT_0, CMD_WRITE, data_port, &(BTA06R_AN.IO_PORT_0));
+000004AF    A100001C                       	LD    _AX,#PMLC_TASK
+000004B3    111E                           	CLRB  _BL
+000004B5    B1041F                         	LDB   _BH,#04h
+000004B8    A10A0022                       	LD    _DX,#BTA06R_AN
+000004BC    EF41FB                         	LCALL PMLC_cmd_exec
+;000524                            }
+000004BF    2011                           	SJMP  ??_42_END
+                  ??_42_ELSE:
+;000526                            {
+;000527                                    PMLC_cmd_exec(&PMLC_TASK, ADDR_IO_PORT_4, CMD_WRITE, data_port, &(BTA06R_AN.IO_PORT_4));
+000004C1    A100001C                       	LD    _AX,#PMLC_TASK
+000004C5    B1401E                         	LDB   _BL,#40h
+000004C8    B1041F                         	LDB   _BH,#04h
+000004CB    A10E0022                       	LD    _DX,#(BTA06R_AN+4)
+000004CF    EF2EFB                         	LCALL PMLC_cmd_exec
+;000528                            }
+                   ??_42_END:
+;000530                            delay_switch_ta();
+000004D2    EF2BFB                         	LCALL delay_switch_ta
+;000533                            if (AB == 0)
+000004D5    980025                         	CMPB  AB?off_ta,0
+000004D8    D714                           	JNE   ??_43_ELSE
+;000534                            {
+;000535                                    PMLC_cmd_exec(&PMLC_TASK, ADDR_IO_PORT_0, CMD_WRITE, 0, &(BTA06R_AN.IO_PORT_0));
+000004DA    A100001C                       	LD    _AX,#PMLC_TASK
+000004DE    111E                           	CLRB  _BL
+000004E0    B1041F                         	LDB   _BH,#04h
+000004E3    1120                           	CLRB  _CL
+000004E5    A10A0022                       	LD    _DX,#BTA06R_AN
+000004E9    EF14FB                         	LCALL PMLC_cmd_exec
+;000536                            }
+000004EC    2013                           	SJMP  ??_43_END
+                  ??_43_ELSE:
+;000538                            {
+;000539                                    PMLC_cmd_exec(&PMLC_TASK, ADDR_IO_PORT_4, CMD_WRITE, 0, &(BTA06R_AN.IO_PORT_4));
+000004EE    A100001C                       	LD    _AX,#PMLC_TASK
+000004F2    B1401E                         	LDB   _BL,#40h
+000004F5    B1041F                         	LDB   _BH,#04h
+000004F8    1120                           	CLRB  _CL
+000004FA    A10E0022                       	LD    _DX,#(BTA06R_AN+4)
+000004FE    EFFFFA                         	LCALL PMLC_cmd_exec
+;000540                            }
+                   ??_43_END:
+;000543                            for (ta_t = 0; ta_t < 32000; ta_t ++)
+00000501    0124                           	CLR   ta_t?off_ta
+00000503    203D                           	SJMP  ??_44_CHECK
+                  ??_44_LOOP:
+;000544                            {
+;000548                                    PMLC_cmd_exec(&PMLC_TASK, ADDR_IO_PORT_2, CMD_READ, 0x00, &(BTA06R_AN.IO_PORT_2));
+00000505    A100001C                       	LD    _AX,#PMLC_TASK
+00000509    B1201E                         	LDB   _BL,#20h
+0000050C    B1081F                         	LDB   _BH,#08h
+0000050F    1120                           	CLRB  _CL
+00000511    A10C0022                       	LD    _DX,#(BTA06R_AN+2)
+00000515    EFE8FA                         	LCALL PMLC_cmd_exec
+;000550                                    indata = BTA06R_AN.IO_PORT_2;
+00000518    B3010C001D                     	LDB   indata?off_ta,(BTA06R_AN+2)
+;000552                                    indata = indata & mask_ta_port;
+0000051D    70261D                         	ANDB  indata?off_ta,mask_ta_port?off_ta
+;000554                                    if (indata == mask_ta_port)
+00000520    98261D                         	CMPB  indata?off_ta,mask_ta_port?off_ta
+00000523    D704                           	JNE   ??_45_ELSE
+;000555                                    {
+;000556                                            return 0;
+00000525    011C                           	CLR   _AX
+00000527    21BC                           	SJMP  ??_EXIT?_off_ta
+;000557                                    }
+                  ??_45_ELSE:
+;000559                                    __NOP();
+00000529    FD                             	NOP   
+;000560                                    __NOP();
+0000052A    FD                             	NOP   
+;000561                                    __NOP();
+0000052B    FD                             	NOP   
+;000562                                    __NOP();
+0000052C    FD                             	NOP   
+;000563                                    __NOP();
+0000052D    FD                             	NOP   
+;000567                                    __DI();
+0000052E    FA                             	DI    
+;000569                                    SYS_WDT_START = 0x3C;
+0000052F    B13C1D                         	LDB   _AH,#3Ch
+00000532    C70100001D                     	STB   _AH,SYS_WDT_START
+;000570                                    SYS_WDT_REPEAT = 0xA5;
+00000537    B1A51D                         	LDB   _AH,#0A5h
+0000053A    C70100001D                     	STB   _AH,SYS_WDT_REPEAT
+;000572                                    __EI();
+0000053F    FB                             	EI    
+;000573                            }
+00000540    0724                           	INC   ta_t?off_ta
+                 ??_44_CHECK:
+00000542    89007D24                       	CMP   ta_t?off_ta,#7D00h
+00000546    D3BD                           	JNC   ??_44_LOOP
+;000575                            return 1;
+00000548    AD011C                         	LDBZE _AX,#01h
+0000054B    2198                           	SJMP  ??_EXIT?_off_ta
+;000576                    }
+;000577            }
+                  ??_32_ELSE:
+;000582            if ((num_ta > 16) &&  (num_ta <=20))
+0000054D    991124                         	CMPB  num_ta?off_ta,#11h
+00000550    D332                           	JNC   ??_46_ELSE
+00000552    991524                         	CMPB  num_ta?off_ta,#15h
+00000555    DB2D                           	JC    ??_46_ELSE
+;000583            {
+;000587                    if (num_AB == 0)
+00000557    B30100001D                     	LDB   _AH,num_AB
+0000055C    98001D                         	CMPB  _AH,0
+0000055F    D710                           	JNE   ??_48_ELSE
+;000588                    {
+;000589                            PMLC_select_device(NOM_PDEV, PDEV_3, &PMLC_TASK);
+00000561    111C                           	CLRB  _AL
+00000563    B1031D                         	LDB   _AH,#03h
+00000566    A100001E                       	LD    _BX,#PMLC_TASK
+0000056A    EF93FA                         	LCALL PMLC_select_device
+;000590                            AB = 0;
+0000056D    1125                           	CLRB  AB?off_ta
+;000591                    }
+0000056F    2010                           	SJMP  ??_48_END
+                  ??_48_ELSE:
+;000593                    {
+;000594                             PMLC_select_device(RSV_PDEV, PDEV_3, &PMLC_TASK);
+00000571    B1801C                         	LDB   _AL,#80h
+00000574    B1031D                         	LDB   _AH,#03h
+00000577    A100001E                       	LD    _BX,#PMLC_TASK
+0000057B    EF82FA                         	LCALL PMLC_select_device
+;000595                             AB = 1;
+0000057E    B10125                         	LDB   AB?off_ta,#01h
+;000596                    }
+                   ??_48_END:
+;000598                    num_ta = num_ta - 16;
+00000581    75F024                         	ADDB  num_ta?off_ta,#0F0h
+;000599            }
+                  ??_46_ELSE:
+;000601            if ((num_ta > 20) &&  (num_ta <=24))
+00000584    991524                         	CMPB  num_ta?off_ta,#15h
+00000587    D332                           	JNC   ??_49_ELSE
+00000589    991924                         	CMPB  num_ta?off_ta,#19h
+0000058C    DB2D                           	JC    ??_49_ELSE
+;000602            {
+;000605                    if (num_AB == 0)
+0000058E    B30100001D                     	LDB   _AH,num_AB
+00000593    98001D                         	CMPB  _AH,0
+00000596    D710                           	JNE   ??_51_ELSE
+;000606                    {
+;000607                            PMLC_select_device(NOM_PDEV, PDEV_2, &PMLC_TASK);
+00000598    111C                           	CLRB  _AL
+0000059A    B1021D                         	LDB   _AH,#02h
+0000059D    A100001E                       	LD    _BX,#PMLC_TASK
+000005A1    EF5CFA                         	LCALL PMLC_select_device
+;000608                            AB = 0;
+000005A4    1125                           	CLRB  AB?off_ta
+;000609                    }
+000005A6    2010                           	SJMP  ??_51_END
+                  ??_51_ELSE:
+;000611                    {
+;000612                            PMLC_select_device(RSV_PDEV, PDEV_2, &PMLC_TASK);
+000005A8    B1801C                         	LDB   _AL,#80h
+000005AB    B1021D                         	LDB   _AH,#02h
+000005AE    A100001E                       	LD    _BX,#PMLC_TASK
+000005B2    EF4BFA                         	LCALL PMLC_select_device
+;000613                            AB = 1;
+000005B5    B10125                         	LDB   AB?off_ta,#01h
+;000614                    }
+                   ??_51_END:
+;000616                    num_ta = num_ta - 20;
+000005B8    75EC24                         	ADDB  num_ta?off_ta,#0ECh
+;000617            }
+                  ??_49_ELSE:
+;000620            if ((num_ta > 24) &&  (num_ta <=28))
+000005BB    991924                         	CMPB  num_ta?off_ta,#19h
+000005BE    D332                           	JNC   ??_52_ELSE
+000005C0    991D24                         	CMPB  num_ta?off_ta,#1Dh
+000005C3    DB2D                           	JC    ??_52_ELSE
+;000621            {
+;000625                    if (num_AB == 0)
+000005C5    B30100001D                     	LDB   _AH,num_AB
+000005CA    98001D                         	CMPB  _AH,0
+000005CD    D712                           	JNE   ??_54_ELSE
+;000626                    {
+;000627                            PMLC_select_device(RSV_PDEV, PDEV_2, &PMLC_TASK);
+000005CF    B1801C                         	LDB   _AL,#80h
+000005D2    B1021D                         	LDB   _AH,#02h
+000005D5    A100001E                       	LD    _BX,#PMLC_TASK
+000005D9    EF24FA                         	LCALL PMLC_select_device
+;000628                            AB = 1;
+000005DC    B10125                         	LDB   AB?off_ta,#01h
+;000629                    }
+000005DF    200E                           	SJMP  ??_54_END
+                  ??_54_ELSE:
+;000631                    {
+;000632                             PMLC_select_device(NOM_PDEV, PDEV_2, &PMLC_TASK);
+000005E1    111C                           	CLRB  _AL
+000005E3    B1021D                         	LDB   _AH,#02h
+000005E6    A100001E                       	LD    _BX,#PMLC_TASK
+000005EA    EF13FA                         	LCALL PMLC_select_device
+;000633                             AB = 0;
+000005ED    1125                           	CLRB  AB?off_ta
+;000634                    }
+                   ??_54_END:
+;000636                    num_ta = num_ta - 24;
+000005EF    75E824                         	ADDB  num_ta?off_ta,#0E8h
+;000637            }
+                  ??_52_ELSE:
+;000640            if ((num_ta > 28) &&  (num_ta <=32))
+000005F2    991D24                         	CMPB  num_ta?off_ta,#1Dh
+000005F5    D332                           	JNC   ??_55_ELSE
+000005F7    992124                         	CMPB  num_ta?off_ta,#21h
+000005FA    DB2D                           	JC    ??_55_ELSE
+;000641            {
+;000645                    if (num_AB == 0)
+000005FC    B30100001D                     	LDB   _AH,num_AB
+00000601    98001D                         	CMPB  _AH,0
+00000604    D712                           	JNE   ??_57_ELSE
+;000646                    {
+;000647                            PMLC_select_device(RSV_PDEV, PDEV_3, &PMLC_TASK);
+00000606    B1801C                         	LDB   _AL,#80h
+00000609    B1031D                         	LDB   _AH,#03h
+0000060C    A100001E                       	LD    _BX,#PMLC_TASK
+00000610    EFEDF9                         	LCALL PMLC_select_device
+;000648                            AB = 1;
+00000613    B10125                         	LDB   AB?off_ta,#01h
+;000649                    }
+00000616    200E                           	SJMP  ??_57_END
+                  ??_57_ELSE:
+;000651                    {
+;000652                            PMLC_select_device(NOM_PDEV, PDEV_3, &PMLC_TASK);
+00000618    111C                           	CLRB  _AL
+0000061A    B1031D                         	LDB   _AH,#03h
+0000061D    A100001E                       	LD    _BX,#PMLC_TASK
+00000621    EFDCF9                         	LCALL PMLC_select_device
+;000653                            AB = 0;
+00000624    1125                           	CLRB  AB?off_ta
+;000654                    }
+                   ??_57_END:
+;000656                    num_ta = num_ta - 28;
+00000626    75E424                         	ADDB  num_ta?off_ta,#0E4h
+;000657            }
+                  ??_55_ELSE:
+;000659            data_port =  2 << ((num_ta - 1)*2);
+00000629    B0241D                         	LDB   _AH,num_ta?off_ta
+0000062C    19011D                         	SHLB  _AH,#01h
+0000062F    75FE1D                         	ADDB  _AH,#0FEh
+00000632    B10220                         	LDB   data_port?off_ta,#02h
+00000635    191D20                         	SHLB  data_port?off_ta,_AH
+;000660            mask_ta_port = 2 << ((num_ta - 1)*2);
+00000638    190124                         	SHLB  num_ta?off_ta,#01h
+0000063B    75FE24                         	ADDB  num_ta?off_ta,#0FEh
+0000063E    B10226                         	LDB   mask_ta_port?off_ta,#02h
+00000641    192426                         	SHLB  mask_ta_port?off_ta,num_ta?off_ta
+;000663            if (AB == 0)
+00000644    980025                         	CMPB  AB?off_ta,0
+00000647    D712                           	JNE   ??_58_ELSE
+;000664            {
+;000665                    PMLC_cmd_exec(&PMLC_TASK, ADDR_IO_PORT_0, CMD_WRITE, data_port, &(BTA05R_AN.IO_PORT_0));
+00000649    A100001C                       	LD    _AX,#PMLC_TASK
+0000064D    111E                           	CLRB  _BL
+0000064F    B1041F                         	LDB   _BH,#04h
+00000652    A1000022                       	LD    _DX,#BTA05R_AN
+00000656    EFA7F9                         	LCALL PMLC_cmd_exec
+;000666            }
+00000659    2011                           	SJMP  ??_58_END
+                  ??_58_ELSE:
+;000668            {
+;000669                    PMLC_cmd_exec(&PMLC_TASK, ADDR_IO_PORT_4, CMD_WRITE, data_port, &(BTA05R_AN.IO_PORT_4));
+0000065B    A100001C                       	LD    _AX,#PMLC_TASK
+0000065F    B1401E                         	LDB   _BL,#40h
+00000662    B1041F                         	LDB   _BH,#04h
+00000665    A1040022                       	LD    _DX,#(BTA05R_AN+4)
+00000669    EF94F9                         	LCALL PMLC_cmd_exec
+;000670            }
+                   ??_58_END:
+;000672            delay_switch_ta();
+0000066C    EF91F9                         	LCALL delay_switch_ta
+;000675            if (AB == 0)
+0000066F    980025                         	CMPB  AB?off_ta,0
+00000672    D714                           	JNE   ??_59_ELSE
+;000676            {
+;000677                    PMLC_cmd_exec(&PMLC_TASK, ADDR_IO_PORT_0, CMD_WRITE, 0, &(BTA05R_AN.IO_PORT_0));
+00000674    A100001C                       	LD    _AX,#PMLC_TASK
+00000678    111E                           	CLRB  _BL
+0000067A    B1041F                         	LDB   _BH,#04h
+0000067D    1120                           	CLRB  _CL
+0000067F    A1000022                       	LD    _DX,#BTA05R_AN
+00000683    EF7AF9                         	LCALL PMLC_cmd_exec
+;000678            }
+00000686    2013                           	SJMP  ??_59_END
+                  ??_59_ELSE:
+;000680            {
+;000681                    PMLC_cmd_exec(&PMLC_TASK, ADDR_IO_PORT_4, CMD_WRITE, 0, &(BTA05R_AN.IO_PORT_4));
+00000688    A100001C                       	LD    _AX,#PMLC_TASK
+0000068C    B1401E                         	LDB   _BL,#40h
+0000068F    B1041F                         	LDB   _BH,#04h
+00000692    1120                           	CLRB  _CL
+00000694    A1040022                       	LD    _DX,#(BTA05R_AN+4)
+00000698    EF65F9                         	LCALL PMLC_cmd_exec
+;000682            }
+                   ??_59_END:
+;000685            for (ta_t = 0; ta_t < 32000; ta_t ++)
+0000069B    0124                           	CLR   ta_t?off_ta
+0000069D    203D                           	SJMP  ??_60_CHECK
+                  ??_60_LOOP:
+;000686            {
+;000689                    PMLC_cmd_exec(&PMLC_TASK, ADDR_IO_PORT_2, CMD_READ, 0x00, &(BTA05R_AN.IO_PORT_2));
+0000069F    A100001C                       	LD    _AX,#PMLC_TASK
+000006A3    B1201E                         	LDB   _BL,#20h
+000006A6    B1081F                         	LDB   _BH,#08h
+000006A9    1120                           	CLRB  _CL
+000006AB    A1020022                       	LD    _DX,#(BTA05R_AN+2)
+000006AF    EF4EF9                         	LCALL PMLC_cmd_exec
+;000691                    indata = BTA05R_AN.IO_PORT_2;
+000006B2    B30102001D                     	LDB   indata?off_ta,(BTA05R_AN+2)
+;000693                    indata = indata & mask_ta_port;
+000006B7    70261D                         	ANDB  indata?off_ta,mask_ta_port?off_ta
+;000695                    if (indata == mask_ta_port)
+000006BA    98261D                         	CMPB  indata?off_ta,mask_ta_port?off_ta
+000006BD    D704                           	JNE   ??_61_ELSE
+;000696                    {
+;000697                            return 0;
+000006BF    011C                           	CLR   _AX
+000006C1    2022                           	SJMP  ??_EXIT?_off_ta
+;000698                    }
+                  ??_61_ELSE:
+;000700                    __NOP();
+000006C3    FD                             	NOP   
+;000701                    __NOP();
+000006C4    FD                             	NOP   
+;000702                    __NOP();
+000006C5    FD                             	NOP   
+;000703                    __NOP();
+000006C6    FD                             	NOP   
+;000704                    __NOP();
+000006C7    FD                             	NOP   
+;000708                    __DI();
+000006C8    FA                             	DI    
+;000710                    SYS_WDT_START = 0x3C;
+000006C9    B13C1D                         	LDB   _AH,#3Ch
+000006CC    C70100001D                     	STB   _AH,SYS_WDT_START
+;000711                    SYS_WDT_REPEAT = 0xA5;
+000006D1    B1A51D                         	LDB   _AH,#0A5h
+000006D4    C70100001D                     	STB   _AH,SYS_WDT_REPEAT
+;000713                    __EI();
+000006D9    FB                             	EI    
+;000715            }
+000006DA    0724                           	INC   ta_t?off_ta
+                 ??_60_CHECK:
+000006DC    89007D24                       	CMP   ta_t?off_ta,#7D00h
+000006E0    D3BD                           	JNC   ??_60_LOOP
+;000717            return 1;
+000006E2    AD011C                         	LDBZE _AX,#01h
+;000718    }
+             ??_EXIT?_off_ta:
+000006E5    CC26                           	POP   _FX
+000006E7    CC24                           	POP   _EX
+000006E9    F0                             	RET   
+.ENDF
+
+.\BKATR\bta.c: 1770 byte(s), 3564 line(s), 0 error(s), 0 warning(s)
+

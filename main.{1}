@@ -1,0 +1,17 @@
+-G"C:\Program Files\CodeMaster-96\1_32_00\Projects\BKATR\Debug\Obj\main.MCO"
+-l
+-d
+-Op
+-E10
+-W50
+-Z0
+-I"C:\Program Files\CodeMaster-96\1_32_00\CMC-96\Inc"
+-Q43
+-NK1874VE7T.h
+-X3 -X4 -X5 -X6
+.\BKATR\main.c
+.\BKATR\bta.c
+.\BKATR\avaria_ta.c
+.\BKATR\ta_proc.c
+.\BKATR\adc.c
+.\BKATR\pmlc_drv.c

@@ -1,0 +1,215 @@
+*******************************************************************************
+*                                                                             *
+*              K1874BE96T C CROSS COMPILER Version 2.00.151126                *
+*                          Copyright (C) 2012 NIIET                           *
+*                                                                             *
+*******************************************************************************
+
+                 init_bav03r:
+;FILE: .\BKATR\adc.c
+;000015       PMLC_CMD_LIST *plmc_cmd_ptr,   // указатель на структуру команды КС-ПМ
+00000000    C824                           	PUSH  _EX
+00000002    A01C24                         	LD    _EX,_AX
+;000020    PMLC_cmd_exec((PMLC_CMD_LIST*)plmc_cmd_ptr, ADDR_IO_CFG_REG, CMD_WRITE, 0x04, &(bav03r_ptr->IO_CFG_REG));
+00000005    4506001E22                     	ADD   _DX,bav03r_ptr?init_bav03r,#0006h
+0000000A    B1801E                         	LDB   bav03r_ptr?init_bav03r,#80h
+0000000D    B1041F                         	LDB   (bav03r_ptr?init_bav03r+1),#04h
+00000010    B10420                         	LDB   _CL,#04h
+00000013    EFEAFF                         	LCALL PMLC_cmd_exec
+;000021    if ((*plmc_cmd_ptr).CMD_EXEC_STATUS)
+00000016    B22420                         	LDB   _CL,[plmc_cmd_ptr?init_bav03r]
+00000019    980020                         	CMPB  _CL,0
+0000001C    DF05                           	JE    ??_1_ELSE
+;000022       return (1);     // команда КС-ПМ выполнена с ошибкой
+0000001E    AD011C                         	LDBZE _AX,#01h
+00000021    2002                           	SJMP  ??_EXIT?_init_bav03r
+                   ??_1_ELSE:
+;000023    else return (0);    // команда КС-ПМ выполнена успешно
+00000023    011C                           	CLR   _AX
+;000024    }
+        ??_EXIT?_init_bav03r:
+00000025    CC24                           	POP   _EX
+00000027    F0                             	RET   
+.ENDF
+          select_adc_channel:
+;000030       PMLC_CMD_LIST *plmc_cmd_ptr,   // указатель на структуру команды КС-ПМ
+00000028    C824                           	PUSH  _EX
+0000002A    A02022                         	LD    _DX,_CX
+0000002D    B01E20                         	LDB   _CL,_BL
+00000030    A01C24                         	LD    _EX,_AX
+;000036            PMLC_cmd_exec((PMLC_CMD_LIST*)plmc_cmd_ptr, ADDR_IO_PORT_2, CMD_WRITE, ch_num, &(bav03r_ptr->IO_PORT_2));
+00000033    65020022                       	ADD   bav03r_ptr?select_adc_channel,#0002h
+00000037    B1201E                         	LDB   _BL,#20h
+0000003A    B1041F                         	LDB   _BH,#04h
+0000003D    EFC0FF                         	LCALL PMLC_cmd_exec
+;000037            if ((*plmc_cmd_ptr).CMD_EXEC_STATUS)
+00000040    B2241F                         	LDB   _BH,[plmc_cmd_ptr?select_adc_channel]
+00000043    98001F                         	CMPB  _BH,0
+00000046    DF05                           	JE    ??_2_ELSE
+;000038            return (1);     // команда КС-ПМ выполнена с ошибкой
+00000048    AD011C                         	LDBZE _AX,#01h
+0000004B    2002                           	SJMP  ??_EXIT?_select_adc_channel
+                   ??_2_ELSE:
+;000041            return (0);    // команда КС-ПМ выполнена успешно
+0000004D    011C                           	CLR   _AX
+;000042    }
+ ??_EXIT?_select_adc_channel:
+0000004F    CC24                           	POP   _EX
+00000051    F0                             	RET   
+.ENDF
+                get_adc_data:
+;000049            PMLC_CMD_LIST *plmc_cmd_ptr,   // указатель на структуру команды КС-ПМ
+00000052    C824                           	PUSH  _EX
+00000054    C826                           	PUSH  _FX
+00000056    A02024                         	LD    _EX,_CX
+00000059    A01C26                         	LD    _FX,_AX
+;000058            if (!adc_num)
+0000005C    98001E                         	CMPB  adc_num?get_adc_data,0
+0000005F    D74A                           	JNE   ??_3_ELSE
+;000059            {
+;000063                    PMLC_cmd_exec((PMLC_CMD_LIST*)plmc_cmd_ptr, ADDR_ADC_GEN_0, CMD_WRITE, 0x55, &(bav03r_ptr->ADC_GEN_0));
+00000061    4507002422                     	ADD   _DX,bav03r_ptr?get_adc_data,#0007h
+00000066    B1A01E                         	LDB   _BL,#0A0h
+00000069    B1041F                         	LDB   _BH,#04h
+0000006C    B15520                         	LDB   _CL,#55h
+0000006F    EF8EFF                         	LCALL PMLC_cmd_exec
+;000066                    PMLC_cmd_exec((PMLC_CMD_LIST*)plmc_cmd_ptr, ADDR_IO_PORT_4, CMD_READ, 0x0, &(bav03r_ptr->IO_PORT_4));
+00000072    4504002422                     	ADD   _DX,bav03r_ptr?get_adc_data,#0004h
+00000077    A0261C                         	LD    _AX,plmc_cmd_ptr?get_adc_data
+0000007A    B1401E                         	LDB   _BL,#40h
+0000007D    B1081F                         	LDB   _BH,#08h
+00000080    1120                           	CLRB  _CL
+00000082    EF7BFF                         	LCALL PMLC_cmd_exec
+;000069                    PMLC_cmd_exec((PMLC_CMD_LIST*)plmc_cmd_ptr, ADDR_IO_PORT_5, CMD_READ, 0x0, &(bav03r_ptr->IO_PORT_5));
+00000085    4505002422                     	ADD   _DX,bav03r_ptr?get_adc_data,#0005h
+0000008A    A0261C                         	LD    _AX,plmc_cmd_ptr?get_adc_data
+0000008D    B1501E                         	LDB   _BL,#50h
+00000090    B1081F                         	LDB   _BH,#08h
+00000093    1120                           	CLRB  _CL
+00000095    EF68FF                         	LCALL PMLC_cmd_exec
+;000072                    d1 = ((bav03r_ptr->IO_PORT_4) >> 4);
+00000098    AF240422                       	LDBZE d1?get_adc_data,04h[bav03r_ptr?get_adc_data]
+0000009C    0A0422                         	SHRA  d1?get_adc_data,#04h
+;000074                    d2 = ((bav03r_ptr->IO_PORT_5) << 4);
+0000009F    AF24051C                       	LDBZE d2?get_adc_data,05h[bav03r_ptr?get_adc_data]
+000000A3    09041C                         	SHL   d2?get_adc_data,#04h
+;000079                    adc_data = d2 | d1 ;
+000000A6    80221C                         	OR    adc_data?get_adc_data,d1?get_adc_data
+;000081            }
+000000A9    2041                           	SJMP  ??_3_END
+                   ??_3_ELSE:
+;000083            {                // АЦП-1
+;000086                    PMLC_cmd_exec((PMLC_CMD_LIST*)plmc_cmd_ptr, ADDR_ADC_GEN_1, CMD_WRITE, 0xAA, &(bav03r_ptr->ADC_GEN_1));
+000000AB    4508002422                     	ADD   _DX,bav03r_ptr?get_adc_data,#0008h
+000000B0    B1B01E                         	LDB   _BL,#0B0h
+000000B3    B1041F                         	LDB   _BH,#04h
+000000B6    B1AA20                         	LDB   _CL,#0AAh
+000000B9    EF44FF                         	LCALL PMLC_cmd_exec
+;000089                    PMLC_cmd_exec((PMLC_CMD_LIST*)plmc_cmd_ptr, ADDR_IO_PORT_0, CMD_READ, 0x0, &(bav03r_ptr->IO_PORT_0));
+000000BC    A0261C                         	LD    _AX,plmc_cmd_ptr?get_adc_data
+000000BF    111E                           	CLRB  _BL
+000000C1    B1081F                         	LDB   _BH,#08h
+000000C4    1120                           	CLRB  _CL
+000000C6    A02422                         	LD    _DX,bav03r_ptr?get_adc_data
+000000C9    EF34FF                         	LCALL PMLC_cmd_exec
+;000092                    PMLC_cmd_exec((PMLC_CMD_LIST*)plmc_cmd_ptr, ADDR_IO_PORT_1, CMD_READ, 0x0, &(bav03r_ptr->IO_PORT_1));
+000000CC    A02422                         	LD    _DX,bav03r_ptr?get_adc_data
+000000CF    0722                           	INC   _DX
+000000D1    A0261C                         	LD    _AX,plmc_cmd_ptr?get_adc_data
+000000D4    B1101E                         	LDB   _BL,#10h
+000000D7    B1081F                         	LDB   _BH,#08h
+000000DA    1120                           	CLRB  _CL
+000000DC    EF21FF                         	LCALL PMLC_cmd_exec
+;000095                    d1 = (bav03r_ptr->IO_PORT_0);
+000000DF    AE2422                         	LDBZE d1?get_adc_data,[bav03r_ptr?get_adc_data]
+;000097                    d2 = ((bav03r_ptr->IO_PORT_1) << 8);
+000000E2    B324011C                       	LDB   d2?get_adc_data,01h[bav03r_ptr?get_adc_data]
+000000E6    09081C                         	SHL   d2?get_adc_data,#08h
+;000099                    adc_data = d2 | d1 ;
+000000E9    80221C                         	OR    adc_data?get_adc_data,d1?get_adc_data
+;000101            }
+                    ??_3_END:
+;000103            return (adc_data);    // команда КС-ПМ выполнена успешно->возвращаются запрашиваемые данные
+;000105    }
+000000EC    CC26                           	POP   _FX
+000000EE    CC24                           	POP   _EX
+000000F0    F0                             	RET   
+.ENDF
+                    read_adc:
+;000110    short unsigned read_adc(unsigned char num_chan)
+000000F1    B01C1E                         	LDB   _BL,_AL
+;000114            if (num_chan > 5)
+000000F4    99061E                         	CMPB  num_chan?read_adc,#06h
+000000F7    D31E                           	JNC   ??_4_ELSE
+;000115            {
+;000116                    num_chan = num_chan - 6;
+000000F9    75FA1E                         	ADDB  num_chan?read_adc,#0FAh
+;000118                    select_adc_channel(&PMLC_TASK, num_chan,&bav03r_N);
+000000FC    A100001C                       	LD    _AX,#PMLC_TASK
+00000100    A1000020                       	LD    _CX,#bav03r_N
+00000104    2F22                           	SCALL select_adc_channel
+;000120                    delay_7000();
+00000106    EFF7FE                         	LCALL delay_7000
+;000122                    adc = get_adc_data(&PMLC_TASK, 1,&bav03r_N);
+00000109    A100001C                       	LD    adc?read_adc,#PMLC_TASK
+0000010D    B1011E                         	LDB   _BL,#01h
+00000110    A1000020                       	LD    _CX,#bav03r_N
+00000114    2F3C                           	SCALL get_adc_data
+;000123            }
+00000116    F0                             	RET   
+                   ??_4_ELSE:
+;000125            {
+;000126                    select_adc_channel(&PMLC_TASK, num_chan,&bav03r_N);
+00000117    A100001C                       	LD    _AX,#PMLC_TASK
+0000011B    A1000020                       	LD    _CX,#bav03r_N
+0000011F    2F07                           	SCALL select_adc_channel
+;000128                    delay_7000();
+00000121    EFDCFE                         	LCALL delay_7000
+;000130                    adc = get_adc_data(&PMLC_TASK, 0,&bav03r_N);
+00000124    A100001C                       	LD    adc?read_adc,#PMLC_TASK
+00000128    111E                           	CLRB  _BL
+0000012A    A1000020                       	LD    _CX,#bav03r_N
+0000012E    2F22                           	SCALL get_adc_data
+;000131            };
+;000133            return (adc);
+;000134    }
+00000130    F0                             	RET   
+.ENDF
+            read_adc_control:
+;000139    short unsigned read_adc_control(unsigned char num_chan)
+;000144            if (num_chan == 14)
+00000131    990E1C                         	CMPB  num_chan?read_adc_control,#0Eh
+00000134    D71A                           	JNE   ??_5_ELSE
+;000145            {
+;000146                    select_adc_channel(&PMLC_TASK, 7,&bav03r_N);
+00000136    A100001C                       	LD    _AX,#PMLC_TASK
+0000013A    B1071E                         	LDB   _BL,#07h
+0000013D    A1000020                       	LD    _CX,#bav03r_N
+00000141    2EE5                           	SCALL select_adc_channel
+;000148                    adc = get_adc_data(&PMLC_TASK, 0,&bav03r_N);
+00000143    A100001C                       	LD    adc?read_adc_control,#PMLC_TASK
+00000147    111E                           	CLRB  _BL
+00000149    A1000020                       	LD    _CX,#bav03r_N
+0000014D    2F03                           	SCALL get_adc_data
+;000149            }
+0000014F    F0                             	RET   
+                   ??_5_ELSE:
+;000151            {
+;000152                    select_adc_channel(&PMLC_TASK, 7,&bav03r_N);
+00000150    A100001C                       	LD    _AX,#PMLC_TASK
+00000154    B1071E                         	LDB   _BL,#07h
+00000157    A1000020                       	LD    _CX,#bav03r_N
+0000015B    2ECB                           	SCALL select_adc_channel
+;000154                    adc = get_adc_data(&PMLC_TASK, 1,&bav03r_N);
+0000015D    A100001C                       	LD    adc?read_adc_control,#PMLC_TASK
+00000161    B1011E                         	LDB   _BL,#01h
+00000164    A1000020                       	LD    _CX,#bav03r_N
+00000168    2EE8                           	SCALL get_adc_data
+;000156            };
+;000158            return (adc);
+;000159    }
+0000016A    F0                             	RET   
+.ENDF
+
+.\BKATR\adc.c: 363 byte(s), 3383 line(s), 0 error(s), 0 warning(s)
+

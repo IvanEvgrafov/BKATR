@@ -1,0 +1,804 @@
+*******************************************************************************
+*                                                                             *
+*              K1874BE96T C CROSS COMPILER Version 2.00.151126                *
+*                          Copyright (C) 2012 NIIET                           *
+*                                                                             *
+*******************************************************************************
+
+                 change_tm_1:
+;FILE: .\BKATR\avaria_ta.c
+;000011    void change_tm_1()
+;000016            num_b = 1;
+00000000    B1011C                         	LDB   num_b?change_tm_1,#01h
+;000018            if  ((tm_1_l - tm_1) > 0)
+00000003    AF0100001E                     	LDBZE _BX,tm_1_l
+00000008    AF01000020                     	LDBZE _CX,tm_1
+0000000D    68201E                         	SUB   _BX,_CX
+00000010    8901001E                       	CMP   _BX,#0001h
+00000014    DE0C                           	JLT   ??_1_ELSE
+;000019            {
+;000020                    tm_buf = tm_1_l - tm_1;
+00000016    B30100001D                     	LDB   tm_buf?change_tm_1,tm_1_l
+0000001B    7B0100001D                     	SUBB  tm_buf?change_tm_1,tm_1
+;000021            }
+00000020    201A                           	SJMP  ??_2_CONTINUE
+                   ??_1_ELSE:
+;000023            {
+;000024                    tm_buf = tm_1 - tm_1_l;
+00000022    B30100001D                     	LDB   tm_buf?change_tm_1,tm_1
+00000027    7B0100001D                     	SUBB  tm_buf?change_tm_1,tm_1_l
+;000025            }
+;000027            while (num_b <=7)
+0000002C    200E                           	SJMP  ??_2_CONTINUE
+                     ??_2_DO:
+;000028            {
+;000029                    if ((tm_buf & 0x1) == 0x1)
+0000002E    51011D1E                       	ANDB  _BL,tm_buf?change_tm_1,#01h
+00000032    98001E                         	CMPB  _BL,0
+;000030                    {
+;000031                            goto set_bit_tm1;
+00000035    D70A                           	JNE   ??_set_bit_tm1_change_tm_1
+;000032                    }
+;000034                    {
+;000035                            tm_buf = tm_buf >> 1;
+00000037    18011D                         	SHRB  tm_buf?change_tm_1,#01h
+;000036                    }
+;000038                    num_b = num_b + 1;
+0000003A    171C                           	INCB  num_b?change_tm_1
+;000039            }
+               ??_2_CONTINUE:
+0000003C    99081C                         	CMPB  num_b?change_tm_1,#08h
+0000003F    D3ED                           	JNC   ??_2_DO
+  ??_set_bit_tm1_change_tm_1:
+;000043            if  ((tm_1_l - tm_1) > 0)
+00000041    AF0100001E                     	LDBZE _BX,tm_1_l
+00000046    AF01000020                     	LDBZE _CX,tm_1
+0000004B    68201E                         	SUB   _BX,_CX
+0000004E    8901001E                       	CMP   _BX,#0001h
+00000052    DE09                           	JLT   ??_4_ELSE
+;000044            {
+;000045                    code_av = 64 + num_b;
+00000054    75401C                         	ADDB  num_b?change_tm_1,#40h
+00000057    C70100001C                     	STB   num_b?change_tm_1,code_av
+;000046            }
+0000005C    F0                             	RET   
+                   ??_4_ELSE:
+;000048            {
+;000049                    code_av = 96 + num_b;
+0000005D    75601C                         	ADDB  num_b?change_tm_1,#60h
+00000060    C70100001C                     	STB   num_b?change_tm_1,code_av
+;000050            }
+;000052    }
+00000065    F0                             	RET   
+.ENDF
+                 change_tm_2:
+;000056    void change_tm_2()
+;000060            num_b = 1;
+00000066    B1011C                         	LDB   num_b?change_tm_2,#01h
+;000062            if  ((tm_2_l - tm_2) > 0)
+00000069    AF0100001E                     	LDBZE _BX,tm_2_l
+0000006E    AF01000020                     	LDBZE _CX,tm_2
+00000073    68201E                         	SUB   _BX,_CX
+00000076    8901001E                       	CMP   _BX,#0001h
+0000007A    DE0C                           	JLT   ??_5_ELSE
+;000063            {
+;000064                    tm_buf = tm_2_l - tm_2;
+0000007C    B30100001D                     	LDB   tm_buf?change_tm_2,tm_2_l
+00000081    7B0100001D                     	SUBB  tm_buf?change_tm_2,tm_2
+;000065            }
+00000086    201A                           	SJMP  ??_6_CONTINUE
+                   ??_5_ELSE:
+;000067            {
+;000068                    tm_buf = tm_2 - tm_2_l;
+00000088    B30100001D                     	LDB   tm_buf?change_tm_2,tm_2
+0000008D    7B0100001D                     	SUBB  tm_buf?change_tm_2,tm_2_l
+;000069            }
+;000071            while (num_b <=7)
+00000092    200E                           	SJMP  ??_6_CONTINUE
+                     ??_6_DO:
+;000072            {
+;000073                    if ((tm_buf & 0x1) == 0x1)
+00000094    51011D1E                       	ANDB  _BL,tm_buf?change_tm_2,#01h
+00000098    98001E                         	CMPB  _BL,0
+;000074                    {
+;000075                            goto set_bit_tm2;
+0000009B    D70A                           	JNE   ??_set_bit_tm2_change_tm_2
+;000076                    }
+;000078                    {
+;000079                            tm_buf = tm_buf >> 1;
+0000009D    18011D                         	SHRB  tm_buf?change_tm_2,#01h
+;000080                    }
+;000082                    num_b = num_b + 1;
+000000A0    171C                           	INCB  num_b?change_tm_2
+;000083            }
+               ??_6_CONTINUE:
+000000A2    99081C                         	CMPB  num_b?change_tm_2,#08h
+000000A5    D3ED                           	JNC   ??_6_DO
+  ??_set_bit_tm2_change_tm_2:
+;000087            if  ((tm_2_l - tm_2) > 0)
+000000A7    AF0100001E                     	LDBZE _BX,tm_2_l
+000000AC    AF01000020                     	LDBZE _CX,tm_2
+000000B1    68201E                         	SUB   _BX,_CX
+000000B4    8901001E                       	CMP   _BX,#0001h
+000000B8    DE17                           	JLT   ??_8_ELSE
+;000088            {
+;000089                    if (num_b > 6)
+000000BA    99071C                         	CMPB  num_b?change_tm_2,#07h
+000000BD    D309                           	JNC   ??_9_ELSE
+;000090                    {
+;000091                            code_av = 88 + num_b;
+000000BF    75581C                         	ADDB  num_b?change_tm_2,#58h
+000000C2    C70100001C                     	STB   num_b?change_tm_2,code_av
+;000092                    }
+000000C7    F0                             	RET   
+                   ??_9_ELSE:
+;000094                    {
+;000095                            code_av = 72 + num_b;
+000000C8    75481C                         	ADDB  num_b?change_tm_2,#48h
+000000CB    C70100001C                     	STB   num_b?change_tm_2,code_av
+;000096                    }
+;000097            }
+000000D0    F0                             	RET   
+                   ??_8_ELSE:
+;000099            {
+;000100                    if (num_b > 6)
+000000D1    99071C                         	CMPB  num_b?change_tm_2,#07h
+000000D4    D309                           	JNC   ??_10_ELSE
+;000101                    {
+;000102                            code_av = 120 + num_b;
+000000D6    75781C                         	ADDB  num_b?change_tm_2,#78h
+000000D9    C70100001C                     	STB   num_b?change_tm_2,code_av
+;000103                    }
+000000DE    F0                             	RET   
+                  ??_10_ELSE:
+;000105                    {
+;000106                            code_av = 104 + num_b;
+000000DF    75681C                         	ADDB  num_b?change_tm_2,#68h
+000000E2    C70100001C                     	STB   num_b?change_tm_2,code_av
+;000107                    }
+;000108            }
+;000109    }
+000000E7    F0                             	RET   
+.ENDF
+                 change_tm_3:
+;000112    void change_tm_3()
+;000116            if (((tm_3_l & 0x1) != (tm_3 & 0x1)) && ((tm_3 & 0x1)==0))
+000000E8    B30100001C                     	LDB   _AL,tm_3_l
+000000ED    970100001C                     	XORB  _AL,tm_3
+000000F2    71011C                         	ANDB  _AL,#01h
+000000F5    98001C                         	CMPB  _AL,0
+000000F8    DF1D                           	JE    ??_11_ELSE
+000000FA    B30100001C                     	LDB   _AL,tm_3
+000000FF    71011C                         	ANDB  _AL,#01h
+00000102    98001C                         	CMPB  _AL,0
+00000105    D710                           	JNE   ??_11_ELSE
+;000117            {
+;000118                    code_av = 79; // нес. выкл
+00000107    B14F1C                         	LDB   _AL,#4Fh
+0000010A    C70100001C                     	STB   _AL,code_av
+;000119                    g1_go = 1;
+0000010F    B1011C                         	LDB   _AL,#01h
+00000112    C70100001C                     	STB   _AL,g1_go
+;000120            }
+                  ??_11_ELSE:
+;000122            if (((tm_3_l & 0x1) != (tm_3 & 0x1)) && ((tm_3 & 0x1)!=0))
+00000117    B30100001C                     	LDB   _AL,tm_3_l
+0000011C    970100001C                     	XORB  _AL,tm_3
+00000121    71011C                         	ANDB  _AL,#01h
+00000124    98001C                         	CMPB  _AL,0
+00000127    DF15                           	JE    ??_13_ELSE
+00000129    B30100001C                     	LDB   _AL,tm_3
+0000012E    71011C                         	ANDB  _AL,#01h
+00000131    98001C                         	CMPB  _AL,0
+00000134    DF08                           	JE    ??_13_ELSE
+;000123            {
+;000124                    code_av = 111; // нес. вкл
+00000136    B16F1C                         	LDB   _AL,#6Fh
+00000139    C70100001C                     	STB   _AL,code_av
+;000125            }
+                  ??_13_ELSE:
+;000128            if (((tm_3_l & 0x2) != (tm_3 & 0x2)) && ((tm_3 & 0x2)==0))
+0000013E    B30100001C                     	LDB   _AL,tm_3_l
+00000143    970100001C                     	XORB  _AL,tm_3
+00000148    71021C                         	ANDB  _AL,#02h
+0000014B    98001C                         	CMPB  _AL,0
+0000014E    DF1D                           	JE    ??_15_ELSE
+00000150    B30100001C                     	LDB   _AL,tm_3
+00000155    71021C                         	ANDB  _AL,#02h
+00000158    98001C                         	CMPB  _AL,0
+0000015B    D710                           	JNE   ??_15_ELSE
+;000129            {
+;000130                    code_av = 80;
+0000015D    B1501C                         	LDB   _AL,#50h
+00000160    C70100001C                     	STB   _AL,code_av
+;000131                    g1_go = 1;
+00000165    B1011C                         	LDB   _AL,#01h
+00000168    C70100001C                     	STB   _AL,g1_go
+;000132            }
+                  ??_15_ELSE:
+;000134            if (((tm_3_l & 0x2) != (tm_3 & 0x2)) && ((tm_3 & 0x2)!=0))
+0000016D    B30100001C                     	LDB   _AL,tm_3_l
+00000172    970100001C                     	XORB  _AL,tm_3
+00000177    71021C                         	ANDB  _AL,#02h
+0000017A    98001C                         	CMPB  _AL,0
+0000017D    DF15                           	JE    ??_17_ELSE
+0000017F    B30100001C                     	LDB   _AL,tm_3
+00000184    71021C                         	ANDB  _AL,#02h
+00000187    98001C                         	CMPB  _AL,0
+0000018A    DF08                           	JE    ??_17_ELSE
+;000135            {
+;000136                    code_av = 112;
+0000018C    B1701C                         	LDB   _AL,#70h
+0000018F    C70100001C                     	STB   _AL,code_av
+;000137            }
+                  ??_17_ELSE:
+;000140            if (((tm_3_l & 0x4) != (tm_3 & 0x4)) && ((tm_3 & 0x4)==0))
+00000194    B30100001C                     	LDB   _AL,tm_3_l
+00000199    970100001C                     	XORB  _AL,tm_3
+0000019E    71041C                         	ANDB  _AL,#04h
+000001A1    98001C                         	CMPB  _AL,0
+000001A4    DF1D                           	JE    ??_19_ELSE
+000001A6    B30100001C                     	LDB   _AL,tm_3
+000001AB    71041C                         	ANDB  _AL,#04h
+000001AE    98001C                         	CMPB  _AL,0
+000001B1    D710                           	JNE   ??_19_ELSE
+;000141            {
+;000142                    code_av = 81; // нес. выкл
+000001B3    B1511C                         	LDB   _AL,#51h
+000001B6    C70100001C                     	STB   _AL,code_av
+;000143                    g2_go = 1;
+000001BB    B1011C                         	LDB   _AL,#01h
+000001BE    C70100001C                     	STB   _AL,g2_go
+;000144            }
+                  ??_19_ELSE:
+;000146            if (((tm_3_l & 0x4) != (tm_3 & 0x4)) && ((tm_3 & 0x4)!=0))
+000001C3    B30100001C                     	LDB   _AL,tm_3_l
+000001C8    970100001C                     	XORB  _AL,tm_3
+000001CD    71041C                         	ANDB  _AL,#04h
+000001D0    98001C                         	CMPB  _AL,0
+000001D3    DF15                           	JE    ??_21_ELSE
+000001D5    B30100001C                     	LDB   _AL,tm_3
+000001DA    71041C                         	ANDB  _AL,#04h
+000001DD    98001C                         	CMPB  _AL,0
+000001E0    DF08                           	JE    ??_21_ELSE
+;000147            {
+;000148                    code_av = 113; // нес. вкл
+000001E2    B1711C                         	LDB   _AL,#71h
+000001E5    C70100001C                     	STB   _AL,code_av
+;000149            }
+                  ??_21_ELSE:
+;000152            if (((tm_3_l & 0x8) != (tm_3 & 0x8)) && ((tm_3 & 0x8)==0))
+000001EA    B30100001C                     	LDB   _AL,tm_3_l
+000001EF    970100001C                     	XORB  _AL,tm_3
+000001F4    71081C                         	ANDB  _AL,#08h
+000001F7    98001C                         	CMPB  _AL,0
+000001FA    DF1D                           	JE    ??_23_ELSE
+000001FC    B30100001C                     	LDB   _AL,tm_3
+00000201    71081C                         	ANDB  _AL,#08h
+00000204    98001C                         	CMPB  _AL,0
+00000207    D710                           	JNE   ??_23_ELSE
+;000153            {
+;000155                    code_av = 82;
+00000209    B1521C                         	LDB   _AL,#52h
+0000020C    C70100001C                     	STB   _AL,code_av
+;000156                    g2_go = 1;
+00000211    B1011C                         	LDB   _AL,#01h
+00000214    C70100001C                     	STB   _AL,g2_go
+;000158            }
+                  ??_23_ELSE:
+;000160            if (((tm_3_l & 0x8) != (tm_3 & 0x8)) && ((tm_3 & 0x8)!=0))
+00000219    B30100001C                     	LDB   _AL,tm_3_l
+0000021E    970100001C                     	XORB  _AL,tm_3
+00000223    71081C                         	ANDB  _AL,#08h
+00000226    98001C                         	CMPB  _AL,0
+00000229    DF15                           	JE    ??_25_ELSE
+0000022B    B30100001C                     	LDB   _AL,tm_3
+00000230    71081C                         	ANDB  _AL,#08h
+00000233    98001C                         	CMPB  _AL,0
+00000236    DF08                           	JE    ??_25_ELSE
+;000161            {
+;000162                    code_av = 114;
+00000238    B1721C                         	LDB   _AL,#72h
+0000023B    C70100001C                     	STB   _AL,code_av
+;000163            }
+                  ??_25_ELSE:
+;000166            if (((tm_3_l & 0x10) != (tm_3 & 0x10)) && ((tm_3 & 0x10)==0))
+00000240    B30100001C                     	LDB   _AL,tm_3_l
+00000245    970100001C                     	XORB  _AL,tm_3
+0000024A    71101C                         	ANDB  _AL,#10h
+0000024D    98001C                         	CMPB  _AL,0
+00000250    DF1D                           	JE    ??_27_ELSE
+00000252    B30100001C                     	LDB   _AL,tm_3
+00000257    71101C                         	ANDB  _AL,#10h
+0000025A    98001C                         	CMPB  _AL,0
+0000025D    D710                           	JNE   ??_27_ELSE
+;000167            {
+;000168                    code_av = 83; // нес. выкл
+0000025F    B1531C                         	LDB   _AL,#53h
+00000262    C70100001C                     	STB   _AL,code_av
+;000169                    h1_go = 1;
+00000267    B1011C                         	LDB   _AL,#01h
+0000026A    C70100001C                     	STB   _AL,h1_go
+;000170            }
+                  ??_27_ELSE:
+;000172            if (((tm_3_l & 0x10) != (tm_3 & 0x10)) && ((tm_3 & 0x10)!=0))
+0000026F    B30100001C                     	LDB   _AL,tm_3_l
+00000274    970100001C                     	XORB  _AL,tm_3
+00000279    71101C                         	ANDB  _AL,#10h
+0000027C    98001C                         	CMPB  _AL,0
+0000027F    DF15                           	JE    ??_29_ELSE
+00000281    B30100001C                     	LDB   _AL,tm_3
+00000286    71101C                         	ANDB  _AL,#10h
+00000289    98001C                         	CMPB  _AL,0
+0000028C    DF08                           	JE    ??_29_ELSE
+;000173            {
+;000174                    code_av = 115; // нес. вкл
+0000028E    B1731C                         	LDB   _AL,#73h
+00000291    C70100001C                     	STB   _AL,code_av
+;000175            }
+                  ??_29_ELSE:
+;000178            if (((tm_3_l & 0x20) != (tm_3 & 0x20)) && ((tm_3 & 0x20)==0))
+00000296    B30100001C                     	LDB   _AL,tm_3_l
+0000029B    970100001C                     	XORB  _AL,tm_3
+000002A0    71201C                         	ANDB  _AL,#20h
+000002A3    98001C                         	CMPB  _AL,0
+000002A6    DF1D                           	JE    ??_31_ELSE
+000002A8    B30100001C                     	LDB   _AL,tm_3
+000002AD    71201C                         	ANDB  _AL,#20h
+000002B0    98001C                         	CMPB  _AL,0
+000002B3    D710                           	JNE   ??_31_ELSE
+;000179            {
+;000180                    code_av = 84;
+000002B5    B1541C                         	LDB   _AL,#54h
+000002B8    C70100001C                     	STB   _AL,code_av
+;000181                    h1_go = 1;
+000002BD    B1011C                         	LDB   _AL,#01h
+000002C0    C70100001C                     	STB   _AL,h1_go
+;000182            }
+                  ??_31_ELSE:
+;000184            if (((tm_3_l & 0x20) != (tm_3 & 0x20)) && ((tm_3 & 0x20)!=0))
+000002C5    B30100001C                     	LDB   _AL,tm_3_l
+000002CA    970100001C                     	XORB  _AL,tm_3
+000002CF    71201C                         	ANDB  _AL,#20h
+000002D2    98001C                         	CMPB  _AL,0
+000002D5    DF15                           	JE    ??_33_ELSE
+000002D7    B30100001C                     	LDB   _AL,tm_3
+000002DC    71201C                         	ANDB  _AL,#20h
+000002DF    98001C                         	CMPB  _AL,0
+000002E2    DF08                           	JE    ??_33_ELSE
+;000185            {
+;000186                    code_av = 116;
+000002E4    B1741C                         	LDB   _AL,#74h
+000002E7    C70100001C                     	STB   _AL,code_av
+;000187            }
+                  ??_33_ELSE:
+;000190            if (((tm_3_l & 0x40) != (tm_3 & 0x40)) && ((tm_3 & 0x40)==0))
+000002EC    B30100001C                     	LDB   _AL,tm_3_l
+000002F1    970100001C                     	XORB  _AL,tm_3
+000002F6    71401C                         	ANDB  _AL,#40h
+000002F9    98001C                         	CMPB  _AL,0
+000002FC    DF1D                           	JE    ??_35_ELSE
+000002FE    B30100001C                     	LDB   _AL,tm_3
+00000303    71401C                         	ANDB  _AL,#40h
+00000306    98001C                         	CMPB  _AL,0
+00000309    D710                           	JNE   ??_35_ELSE
+;000191            {
+;000192                    code_av = 85; // нес. выкл
+0000030B    B1551C                         	LDB   _AL,#55h
+0000030E    C70100001C                     	STB   _AL,code_av
+;000193                    h2_go = 1;
+00000313    B1011C                         	LDB   _AL,#01h
+00000316    C70100001C                     	STB   _AL,h2_go
+;000194            }
+                  ??_35_ELSE:
+;000196            if (((tm_3_l & 0x40) != (tm_3 & 0x40)) && ((tm_3 & 0x40)!=0))
+0000031B    B30100001C                     	LDB   _AL,tm_3_l
+00000320    970100001C                     	XORB  _AL,tm_3
+00000325    71401C                         	ANDB  _AL,#40h
+00000328    98001C                         	CMPB  _AL,0
+0000032B    DF15                           	JE    ??_37_ELSE
+0000032D    B30100001C                     	LDB   _AL,tm_3
+00000332    71401C                         	ANDB  _AL,#40h
+00000335    98001C                         	CMPB  _AL,0
+00000338    DF08                           	JE    ??_37_ELSE
+;000197            {
+;000198                    code_av = 117; // нес. вкл
+0000033A    B1751C                         	LDB   _AL,#75h
+0000033D    C70100001C                     	STB   _AL,code_av
+;000199            }
+                  ??_37_ELSE:
+;000203            if (((tm_3_l & 0x80) != (tm_3 & 0x80)) && ((tm_3 & 0x80)==0))
+00000342    B30100001C                     	LDB   _AL,tm_3_l
+00000347    970100001C                     	XORB  _AL,tm_3
+0000034C    71801C                         	ANDB  _AL,#80h
+0000034F    98001C                         	CMPB  _AL,0
+00000352    DF1D                           	JE    ??_39_ELSE
+00000354    B30100001C                     	LDB   _AL,tm_3
+00000359    71801C                         	ANDB  _AL,#80h
+0000035C    98001C                         	CMPB  _AL,0
+0000035F    D710                           	JNE   ??_39_ELSE
+;000204            {
+;000205                    code_av = 86;
+00000361    B1561C                         	LDB   _AL,#56h
+00000364    C70100001C                     	STB   _AL,code_av
+;000206                    h2_go = 1;
+00000369    B1011C                         	LDB   _AL,#01h
+0000036C    C70100001C                     	STB   _AL,h2_go
+;000207            }
+                  ??_39_ELSE:
+;000209            if (((tm_3_l & 0x80) != (tm_3 & 0x80)) && ((tm_3 & 0x80)!=0))
+00000371    B30100001C                     	LDB   _AL,tm_3_l
+00000376    970100001C                     	XORB  _AL,tm_3
+0000037B    71801C                         	ANDB  _AL,#80h
+0000037E    98001C                         	CMPB  _AL,0
+00000381    DF15                           	JE    ??_41_ELSE
+00000383    B30100001C                     	LDB   _AL,tm_3
+00000388    71801C                         	ANDB  _AL,#80h
+0000038B    98001C                         	CMPB  _AL,0
+0000038E    DF08                           	JE    ??_41_ELSE
+;000210            {
+;000211                    code_av = 118;
+00000390    B1761C                         	LDB   _AL,#76h
+00000393    C70100001C                     	STB   _AL,code_av
+;000212            }
+                  ??_41_ELSE:
+;000213    }
+00000398    F0                             	RET   
+.ENDF
+                 change_tm_4:
+;000216     void change_tm_4()
+;000220            if (((tm_4_l & 0x1) != (tm_4 & 0x1)) && ((tm_4 & 0x1)==0))
+00000399    B30100001C                     	LDB   _AL,tm_4_l
+0000039E    970100001C                     	XORB  _AL,tm_4
+000003A3    71011C                         	ANDB  _AL,#01h
+000003A6    98001C                         	CMPB  _AL,0
+000003A9    DF15                           	JE    ??_43_ELSE
+000003AB    B30100001C                     	LDB   _AL,tm_4
+000003B0    71011C                         	ANDB  _AL,#01h
+000003B3    98001C                         	CMPB  _AL,0
+000003B6    D708                           	JNE   ??_43_ELSE
+;000221            {
+;000222                    code_av = 87; // нес. выкл
+000003B8    B1571C                         	LDB   _AL,#57h
+000003BB    C70100001C                     	STB   _AL,code_av
+;000223            }
+                  ??_43_ELSE:
+;000225            if (((tm_4_l & 0x1) != (tm_4 & 0x1)) && ((tm_4 & 0x1)!=0))
+000003C0    B30100001C                     	LDB   _AL,tm_4_l
+000003C5    970100001C                     	XORB  _AL,tm_4
+000003CA    71011C                         	ANDB  _AL,#01h
+000003CD    98001C                         	CMPB  _AL,0
+000003D0    DF15                           	JE    ??_45_ELSE
+000003D2    B30100001C                     	LDB   _AL,tm_4
+000003D7    71011C                         	ANDB  _AL,#01h
+000003DA    98001C                         	CMPB  _AL,0
+000003DD    DF08                           	JE    ??_45_ELSE
+;000226            {
+;000227                    code_av = 119; // нес. вкл
+000003DF    B1771C                         	LDB   _AL,#77h
+000003E2    C70100001C                     	STB   _AL,code_av
+;000228            }
+                  ??_45_ELSE:
+;000231            if (((tm_4_l & 0x2) != (tm_4 & 0x2)) && ((tm_4 & 0x2)==0))
+000003E7    B30100001C                     	LDB   _AL,tm_4_l
+000003EC    970100001C                     	XORB  _AL,tm_4
+000003F1    71021C                         	ANDB  _AL,#02h
+000003F4    98001C                         	CMPB  _AL,0
+000003F7    DF15                           	JE    ??_47_ELSE
+000003F9    B30100001C                     	LDB   _AL,tm_4
+000003FE    71021C                         	ANDB  _AL,#02h
+00000401    98001C                         	CMPB  _AL,0
+00000404    D708                           	JNE   ??_47_ELSE
+;000232            {
+;000233                    code_av = 88;
+00000406    B1581C                         	LDB   _AL,#58h
+00000409    C70100001C                     	STB   _AL,code_av
+;000234            }
+                  ??_47_ELSE:
+;000236            if (((tm_4_l & 0x2) != (tm_4 & 0x2)) && ((tm_4 & 0x2)!=0))
+0000040E    B30100001C                     	LDB   _AL,tm_4_l
+00000413    970100001C                     	XORB  _AL,tm_4
+00000418    71021C                         	ANDB  _AL,#02h
+0000041B    98001C                         	CMPB  _AL,0
+0000041E    DF15                           	JE    ??_49_ELSE
+00000420    B30100001C                     	LDB   _AL,tm_4
+00000425    71021C                         	ANDB  _AL,#02h
+00000428    98001C                         	CMPB  _AL,0
+0000042B    DF08                           	JE    ??_49_ELSE
+;000237            {
+;000238                    code_av = 120;
+0000042D    B1781C                         	LDB   _AL,#78h
+00000430    C70100001C                     	STB   _AL,code_av
+;000239            }
+                  ??_49_ELSE:
+;000242            if (((tm_4_l & 0x4) != (tm_4 & 0x4)) && ((tm_4 & 0x4)==0))
+00000435    B30100001C                     	LDB   _AL,tm_4_l
+0000043A    970100001C                     	XORB  _AL,tm_4
+0000043F    71041C                         	ANDB  _AL,#04h
+00000442    98001C                         	CMPB  _AL,0
+00000445    DF15                           	JE    ??_51_ELSE
+00000447    B30100001C                     	LDB   _AL,tm_4
+0000044C    71041C                         	ANDB  _AL,#04h
+0000044F    98001C                         	CMPB  _AL,0
+00000452    D708                           	JNE   ??_51_ELSE
+;000243            {
+;000244                    code_av = 89; // нес. выкл
+00000454    B1591C                         	LDB   _AL,#59h
+00000457    C70100001C                     	STB   _AL,code_av
+;000245            }
+                  ??_51_ELSE:
+;000247            if (((tm_4_l & 0x4) != (tm_4 & 0x4)) && ((tm_4 & 0x4)!=0))
+0000045C    B30100001C                     	LDB   _AL,tm_4_l
+00000461    970100001C                     	XORB  _AL,tm_4
+00000466    71041C                         	ANDB  _AL,#04h
+00000469    98001C                         	CMPB  _AL,0
+0000046C    DF15                           	JE    ??_53_ELSE
+0000046E    B30100001C                     	LDB   _AL,tm_4
+00000473    71041C                         	ANDB  _AL,#04h
+00000476    98001C                         	CMPB  _AL,0
+00000479    DF08                           	JE    ??_53_ELSE
+;000248            {
+;000249                    code_av = 121; // нес. вкл
+0000047B    B1791C                         	LDB   _AL,#79h
+0000047E    C70100001C                     	STB   _AL,code_av
+;000250            }
+                  ??_53_ELSE:
+;000253            if (((tm_4_l & 0x8) != (tm_4 & 0x8)) && ((tm_4 & 0x8)==0))
+00000483    B30100001C                     	LDB   _AL,tm_4_l
+00000488    970100001C                     	XORB  _AL,tm_4
+0000048D    71081C                         	ANDB  _AL,#08h
+00000490    98001C                         	CMPB  _AL,0
+00000493    DF15                           	JE    ??_55_ELSE
+00000495    B30100001C                     	LDB   _AL,tm_4
+0000049A    71081C                         	ANDB  _AL,#08h
+0000049D    98001C                         	CMPB  _AL,0
+000004A0    D708                           	JNE   ??_55_ELSE
+;000254            {
+;000255                    code_av = 90;
+000004A2    B15A1C                         	LDB   _AL,#5Ah
+000004A5    C70100001C                     	STB   _AL,code_av
+;000256            }
+                  ??_55_ELSE:
+;000258            if (((tm_4_l & 0x8) != (tm_4 & 0x8)) && ((tm_4 & 0x8)!=0))
+000004AA    B30100001C                     	LDB   _AL,tm_4_l
+000004AF    970100001C                     	XORB  _AL,tm_4
+000004B4    71081C                         	ANDB  _AL,#08h
+000004B7    98001C                         	CMPB  _AL,0
+000004BA    DF15                           	JE    ??_57_ELSE
+000004BC    B30100001C                     	LDB   _AL,tm_4
+000004C1    71081C                         	ANDB  _AL,#08h
+000004C4    98001C                         	CMPB  _AL,0
+000004C7    DF08                           	JE    ??_57_ELSE
+;000259            {
+;000260                    code_av = 122;
+000004C9    B17A1C                         	LDB   _AL,#7Ah
+000004CC    C70100001C                     	STB   _AL,code_av
+;000261            }
+                  ??_57_ELSE:
+;000264            if (((tm_4_l & 0x10) != (tm_4 & 0x10)) && ((tm_4 & 0x10)==0))
+000004D1    B30100001C                     	LDB   _AL,tm_4_l
+000004D6    970100001C                     	XORB  _AL,tm_4
+000004DB    71101C                         	ANDB  _AL,#10h
+000004DE    98001C                         	CMPB  _AL,0
+000004E1    DF15                           	JE    ??_59_ELSE
+000004E3    B30100001C                     	LDB   _AL,tm_4
+000004E8    71101C                         	ANDB  _AL,#10h
+000004EB    98001C                         	CMPB  _AL,0
+000004EE    D708                           	JNE   ??_59_ELSE
+;000265            {
+;000266                    code_av = 91; // нес. выкл
+000004F0    B15B1C                         	LDB   _AL,#5Bh
+000004F3    C70100001C                     	STB   _AL,code_av
+;000267            }
+                  ??_59_ELSE:
+;000269            if (((tm_4_l & 0x10) != (tm_4 & 0x10)) && ((tm_4 & 0x10)!=0))
+000004F8    B30100001C                     	LDB   _AL,tm_4_l
+000004FD    970100001C                     	XORB  _AL,tm_4
+00000502    71101C                         	ANDB  _AL,#10h
+00000505    98001C                         	CMPB  _AL,0
+00000508    DF15                           	JE    ??_61_ELSE
+0000050A    B30100001C                     	LDB   _AL,tm_4
+0000050F    71101C                         	ANDB  _AL,#10h
+00000512    98001C                         	CMPB  _AL,0
+00000515    DF08                           	JE    ??_61_ELSE
+;000270            {
+;000271                    code_av = 123; // нес. вкл
+00000517    B17B1C                         	LDB   _AL,#7Bh
+0000051A    C70100001C                     	STB   _AL,code_av
+;000272            }
+                  ??_61_ELSE:
+;000275            if (((tm_4_l & 0x20) != (tm_4 & 0x20)) && ((tm_4 & 0x20)==0))
+0000051F    B30100001C                     	LDB   _AL,tm_4_l
+00000524    970100001C                     	XORB  _AL,tm_4
+00000529    71201C                         	ANDB  _AL,#20h
+0000052C    98001C                         	CMPB  _AL,0
+0000052F    DF15                           	JE    ??_63_ELSE
+00000531    B30100001C                     	LDB   _AL,tm_4
+00000536    71201C                         	ANDB  _AL,#20h
+00000539    98001C                         	CMPB  _AL,0
+0000053C    D708                           	JNE   ??_63_ELSE
+;000276            {
+;000277                    code_av = 92;
+0000053E    B15C1C                         	LDB   _AL,#5Ch
+00000541    C70100001C                     	STB   _AL,code_av
+;000278            }
+                  ??_63_ELSE:
+;000280            if (((tm_4_l & 0x20) != (tm_4 & 0x20)) && ((tm_4 & 0x20)!=0))
+00000546    B30100001C                     	LDB   _AL,tm_4_l
+0000054B    970100001C                     	XORB  _AL,tm_4
+00000550    71201C                         	ANDB  _AL,#20h
+00000553    98001C                         	CMPB  _AL,0
+00000556    DF15                           	JE    ??_65_ELSE
+00000558    B30100001C                     	LDB   _AL,tm_4
+0000055D    71201C                         	ANDB  _AL,#20h
+00000560    98001C                         	CMPB  _AL,0
+00000563    DF08                           	JE    ??_65_ELSE
+;000281            {
+;000282                    code_av = 124;
+00000565    B17C1C                         	LDB   _AL,#7Ch
+00000568    C70100001C                     	STB   _AL,code_av
+;000283            }
+                  ??_65_ELSE:
+;000286            if (((tm_4_l & 0x40) != (tm_4 & 0x40)) && ((tm_4 & 0x40)==0))
+0000056D    B30100001C                     	LDB   _AL,tm_4_l
+00000572    970100001C                     	XORB  _AL,tm_4
+00000577    71401C                         	ANDB  _AL,#40h
+0000057A    98001C                         	CMPB  _AL,0
+0000057D    DF15                           	JE    ??_67_ELSE
+0000057F    B30100001C                     	LDB   _AL,tm_4
+00000584    71401C                         	ANDB  _AL,#40h
+00000587    98001C                         	CMPB  _AL,0
+0000058A    D708                           	JNE   ??_67_ELSE
+;000287            {
+;000288                    code_av = 95; // нес. выкл
+0000058C    B15F1C                         	LDB   _AL,#5Fh
+0000058F    C70100001C                     	STB   _AL,code_av
+;000289            }
+                  ??_67_ELSE:
+;000291            if (((tm_4_l & 0x40) != (tm_4 & 0x40)) && ((tm_4 & 0x40)!=0))
+00000594    B30100001C                     	LDB   _AL,tm_4_l
+00000599    970100001C                     	XORB  _AL,tm_4
+0000059E    71401C                         	ANDB  _AL,#40h
+000005A1    98001C                         	CMPB  _AL,0
+000005A4    DF15                           	JE    ??_69_ELSE
+000005A6    B30100001C                     	LDB   _AL,tm_4
+000005AB    71401C                         	ANDB  _AL,#40h
+000005AE    98001C                         	CMPB  _AL,0
+000005B1    DF08                           	JE    ??_69_ELSE
+;000292            {
+;000293                    code_av = 127; // нес. вкл
+000005B3    B17F1C                         	LDB   _AL,#7Fh
+000005B6    C70100001C                     	STB   _AL,code_av
+;000294            }
+                  ??_69_ELSE:
+;000297            if (((tm_4_l & 0x80) != (tm_4 & 0x80)) && ((tm_4 & 0x80)==0))
+000005BB    B30100001C                     	LDB   _AL,tm_4_l
+000005C0    970100001C                     	XORB  _AL,tm_4
+000005C5    71801C                         	ANDB  _AL,#80h
+000005C8    98001C                         	CMPB  _AL,0
+000005CB    DF15                           	JE    ??_71_ELSE
+000005CD    B30100001C                     	LDB   _AL,tm_4
+000005D2    71801C                         	ANDB  _AL,#80h
+000005D5    98001C                         	CMPB  _AL,0
+000005D8    D708                           	JNE   ??_71_ELSE
+;000298            {
+;000299                    code_av = 96;
+000005DA    B1601C                         	LDB   _AL,#60h
+000005DD    C70100001C                     	STB   _AL,code_av
+;000300            }
+                  ??_71_ELSE:
+;000302            if (((tm_4_l & 0x80) != (tm_4 & 0x80)) && ((tm_4 & 0x80)!=0))
+000005E2    B30100001C                     	LDB   _AL,tm_4_l
+000005E7    970100001C                     	XORB  _AL,tm_4
+000005EC    71801C                         	ANDB  _AL,#80h
+000005EF    98001C                         	CMPB  _AL,0
+000005F2    DF15                           	JE    ??_73_ELSE
+000005F4    B30100001C                     	LDB   _AL,tm_4
+000005F9    71801C                         	ANDB  _AL,#80h
+000005FC    98001C                         	CMPB  _AL,0
+000005FF    DF08                           	JE    ??_73_ELSE
+;000303            {
+;000304                    code_av = 128;
+00000601    B1801C                         	LDB   _AL,#80h
+00000604    C70100001C                     	STB   _AL,code_av
+;000305            }
+                  ??_73_ELSE:
+;000306    }
+00000609    F0                             	RET   
+.ENDF
+             analiz_vent_err:
+;000310    void analiz_vent_err()
+;000312            if ((tm_3 & 0x1) != 0)
+0000060A    B30100001C                     	LDB   _AL,tm_3
+0000060F    71011C                         	ANDB  _AL,#01h
+00000612    98001C                         	CMPB  _AL,0
+00000615    DF08                           	JE    ??_75_ELSE
+;000313            {
+;000314                    code_av = 47;
+00000617    B12F1C                         	LDB   _AL,#2Fh
+0000061A    C70100001C                     	STB   _AL,code_av
+;000315            }
+                  ??_75_ELSE:
+;000317            if ((tm_3 & 0x2) != 0)
+0000061F    B30100001C                     	LDB   _AL,tm_3
+00000624    71021C                         	ANDB  _AL,#02h
+00000627    98001C                         	CMPB  _AL,0
+0000062A    DF08                           	JE    ??_76_ELSE
+;000318            {
+;000319                    code_av = 48;
+0000062C    B1301C                         	LDB   _AL,#30h
+0000062F    C70100001C                     	STB   _AL,code_av
+;000320            }
+                  ??_76_ELSE:
+;000322            if ((tm_3 & 0x4) != 0)
+00000634    B30100001C                     	LDB   _AL,tm_3
+00000639    71041C                         	ANDB  _AL,#04h
+0000063C    98001C                         	CMPB  _AL,0
+0000063F    DF08                           	JE    ??_77_ELSE
+;000323            {
+;000324                    code_av = 49 ;
+00000641    B1311C                         	LDB   _AL,#31h
+00000644    C70100001C                     	STB   _AL,code_av
+;000325            }
+                  ??_77_ELSE:
+;000327            if ((tm_3 & 0x8) != 0)
+00000649    B30100001C                     	LDB   _AL,tm_3
+0000064E    71081C                         	ANDB  _AL,#08h
+00000651    98001C                         	CMPB  _AL,0
+00000654    DF08                           	JE    ??_78_ELSE
+;000328            {
+;000329                    code_av = 50;
+00000656    B1321C                         	LDB   _AL,#32h
+00000659    C70100001C                     	STB   _AL,code_av
+;000330            }
+                  ??_78_ELSE:
+;000333            if ((tm_3 & 0x10) != 0)
+0000065E    B30100001C                     	LDB   _AL,tm_3
+00000663    71101C                         	ANDB  _AL,#10h
+00000666    98001C                         	CMPB  _AL,0
+00000669    DF08                           	JE    ??_79_ELSE
+;000334            {
+;000335                    code_av = 51;
+0000066B    B1331C                         	LDB   _AL,#33h
+0000066E    C70100001C                     	STB   _AL,code_av
+;000336            }
+                  ??_79_ELSE:
+;000338            if ((tm_3 & 0x20) != 0)
+00000673    B30100001C                     	LDB   _AL,tm_3
+00000678    71201C                         	ANDB  _AL,#20h
+0000067B    98001C                         	CMPB  _AL,0
+0000067E    DF08                           	JE    ??_80_ELSE
+;000339            {
+;000340                    code_av = 52;
+00000680    B1341C                         	LDB   _AL,#34h
+00000683    C70100001C                     	STB   _AL,code_av
+;000341            }
+                  ??_80_ELSE:
+;000343            if ((tm_3 & 0x40) != 0)
+00000688    B30100001C                     	LDB   _AL,tm_3
+0000068D    71401C                         	ANDB  _AL,#40h
+00000690    98001C                         	CMPB  _AL,0
+00000693    DF08                           	JE    ??_81_ELSE
+;000344            {
+;000345                    code_av = 53 ;
+00000695    B1351C                         	LDB   _AL,#35h
+00000698    C70100001C                     	STB   _AL,code_av
+;000346            }
+                  ??_81_ELSE:
+;000348            if ((tm_3 & 0x80) != 0)
+0000069D    B30100001C                     	LDB   _AL,tm_3
+000006A2    71801C                         	ANDB  _AL,#80h
+000006A5    98001C                         	CMPB  _AL,0
+000006A8    DF08                           	JE    ??_82_ELSE
+;000349            {
+;000350                    code_av = 54;
+000006AA    B1361C                         	LDB   _AL,#36h
+000006AD    C70100001C                     	STB   _AL,code_av
+;000351            }
+                  ??_82_ELSE:
+;000352    }
+000006B2    F0                             	RET   
+.ENDF
+
+.\BKATR\avaria_ta.c: 1715 byte(s), 2962 line(s), 0 error(s), 0 warning(s)
+

@@ -1,0 +1,21 @@
+-A (code)CODE(02000H-0FFFFH)
+-A (data)DATA(0800H-017FFH,0100H-07FFH)
+-m
+-Z CSTACK(256)
+-Z HEAP(0)
+-M 10
+-M 20
+-M 21
+-M 60
+-M 80
+-O"C:\Program Files\CodeMaster-96\1_32_00\CMC-96\Lib"
+-E"C:\Program Files\CodeMaster-96\1_32_00\Projects\BKATR\Debug\Exe\BKATR"
+-F MI
+"C:\Program Files\CodeMaster-96\1_32_00\Projects\BKATR\Debug\Obj\main.MCO"
+"C:\Program Files\CodeMaster-96\1_32_00\Projects\BKATR\Debug\Obj\bta.MCO"
+"C:\Program Files\CodeMaster-96\1_32_00\Projects\BKATR\Debug\Obj\avaria_ta.MCO"
+"C:\Program Files\CodeMaster-96\1_32_00\Projects\BKATR\Debug\Obj\ta_proc.MCO"
+"C:\Program Files\CodeMaster-96\1_32_00\Projects\BKATR\Debug\Obj\adc.MCO"
+"C:\Program Files\CodeMaster-96\1_32_00\Projects\BKATR\Debug\Obj\pmlc_drv.MCO"
+K1874VE7T_av3.mcl
+c96_cv2.mcl
